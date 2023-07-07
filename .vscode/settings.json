@@ -1,0 +1,28 @@
+{
+  "json.schemas": [
+    {
+      "fileMatch": ["cybersource3.json"],
+      "url": "https://raw.githubusercontent.com/OAI/OpenAPI-Specification/main/schemas/v3.0/schema.json"
+    }
+  ],
+  "workbench.colorCustomizations": {
+    "activityBar.activeBackground": "#fdc269",
+    "activityBar.background": "#fdc269",
+    "activityBar.foreground": "#15202b",
+    "activityBar.inactiveForeground": "#15202b99",
+    "activityBarBadge.background": "#029d5f",
+    "activityBarBadge.foreground": "#e7e7e7",
+    "commandCenter.border": "#15202b99",
+    "sash.hoverBorder": "#fdc269",
+    "statusBar.background": "#fdad37",
+    "statusBar.foreground": "#15202b",
+    "statusBarItem.hoverBackground": "#fc9805",
+    "statusBarItem.remoteBackground": "#fdad37",
+    "statusBarItem.remoteForeground": "#15202b",
+    "titleBar.activeBackground": "#fdad37",
+    "titleBar.activeForeground": "#15202b",
+    "titleBar.inactiveBackground": "#fdad3799",
+    "titleBar.inactiveForeground": "#15202b99"
+  },
+  "peacock.color": "#fdad37"
+}
