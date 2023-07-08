@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InvoicingV2InvoicesAllGet200ResponseInvoices } from './invoicing-v2-invoices-all-get200-response-invoices';
-import { InvoicingV2InvoicesAllGet200ResponseLinks } from './invoicing-v2-invoices-all-get200-response-links';
 /**
  * 
  * @export
@@ -21,10 +19,10 @@ import { InvoicingV2InvoicesAllGet200ResponseLinks } from './invoicing-v2-invoic
 export interface InvoicingV2InvoicesAllGet200Response {
     /**
      * 
-     * @type {InvoicingV2InvoicesAllGet200ResponseLinks}
+     * @type {any}
      * @memberof InvoicingV2InvoicesAllGet200Response
      */
-    links?: InvoicingV2InvoicesAllGet200ResponseLinks;
+    links?: any;
     /**
      * Time of request in UTC. Format: `YYYY-MM-DDThh:mm:ssZ` **Example** `2016-08-11T22:47:57Z` equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The `T` separates the date and the time. The `Z` indicates UTC.  Returned by Cybersource for all services. 
      * @type {string}
@@ -39,8 +37,8 @@ export interface InvoicingV2InvoicesAllGet200Response {
     totalInvoices?: number;
     /**
      * 
-     * @type {Array<InvoicingV2InvoicesAllGet200ResponseInvoices>}
+     * @type {Array<any>}
      * @memberof InvoicingV2InvoicesAllGet200Response
      */
-    invoices?: Array<InvoicingV2InvoicesAllGet200ResponseInvoices>;
+    invoices?: Array<any>;
 }

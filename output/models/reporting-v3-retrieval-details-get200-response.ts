@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3RetrievalDetailsGet200ResponseRetrievalDetails } from './reporting-v3-retrieval-details-get200-response-retrieval-details';
 /**
  * 
  * @export
@@ -38,8 +37,8 @@ export interface ReportingV3RetrievalDetailsGet200Response {
     endTime?: Date;
     /**
      * List of Retrieval Details list.
-     * @type {Array<ReportingV3RetrievalDetailsGet200ResponseRetrievalDetails>}
+     * @type {Array<any>}
      * @memberof ReportingV3RetrievalDetailsGet200Response
      */
-    retrievalDetails?: Array<ReportingV3RetrievalDetailsGet200ResponseRetrievalDetails>;
+    retrievalDetails?: Array<any>;
 }

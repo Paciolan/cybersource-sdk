@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ShippingAddressListForCustomerEmbedded } from './shipping-address-list-for-customer-embedded';
-import { ShippingAddressListForCustomerLinks } from './shipping-address-list-for-customer-links';
 /**
  * A paginated container of Shipping Addresses. 
  * @export
@@ -21,10 +19,10 @@ import { ShippingAddressListForCustomerLinks } from './shipping-address-list-for
 export interface ShippingAddressListForCustomer {
     /**
      * 
-     * @type {ShippingAddressListForCustomerLinks}
+     * @type {any}
      * @memberof ShippingAddressListForCustomer
      */
-    links?: ShippingAddressListForCustomerLinks;
+    links?: any;
     /**
      * The offset parameter supplied in the request.
      * @type {number}
@@ -50,9 +48,9 @@ export interface ShippingAddressListForCustomer {
      */
     total?: number;
     /**
-     * 
-     * @type {ShippingAddressListForCustomerEmbedded}
+     * Shipping Address Resources. 
+     * @type {any}
      * @memberof ShippingAddressListForCustomer
      */
-    embedded?: ShippingAddressListForCustomerEmbedded;
+    embedded?: any;
 }

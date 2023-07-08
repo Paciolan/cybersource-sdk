@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponseDefaultLinks } from './inline-response-default-links';
-import { InlineResponseDefaultResponseStatus } from './inline-response-default-response-status';
 /**
  * 
  * @export
@@ -21,14 +19,14 @@ import { InlineResponseDefaultResponseStatus } from './inline-response-default-r
 export interface InlineResponseDefault {
     /**
      * 
-     * @type {InlineResponseDefaultResponseStatus}
+     * @type {any}
      * @memberof InlineResponseDefault
      */
-    responseStatus?: InlineResponseDefaultResponseStatus;
+    responseStatus?: any;
     /**
      * 
-     * @type {InlineResponseDefaultLinks}
+     * @type {any}
      * @memberof InlineResponseDefault
      */
-    links?: InlineResponseDefaultLinks;
+    links?: any;
 }

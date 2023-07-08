@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ChargebackDetailsGet200ResponseChargebackDetails } from './reporting-v3-chargeback-details-get200-response-chargeback-details';
 /**
  * 
  * @export
@@ -38,8 +37,8 @@ export interface ReportingV3ChargebackDetailsGet200Response {
     endTime?: Date;
     /**
      * List of Chargeback Details list.
-     * @type {Array<ReportingV3ChargebackDetailsGet200ResponseChargebackDetails>}
+     * @type {Array<any>}
      * @memberof ReportingV3ChargebackDetailsGet200Response
      */
-    chargebackDetails?: Array<ReportingV3ChargebackDetailsGet200ResponseChargebackDetails>;
+    chargebackDetails?: Array<any>;
 }

@@ -11,27 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Ptsv2paymentsHealthCareInformation } from './ptsv2payments-health-care-information';
-import { Ptsv2paymentsMerchantDefinedInformation } from './ptsv2payments-merchant-defined-information';
-import { TssV2TransactionsGet200ResponseApplicationInformation } from './tss-v2-transactions-get200-response-application-information';
-import { TssV2TransactionsGet200ResponseBuyerInformation } from './tss-v2-transactions-get200-response-buyer-information';
-import { TssV2TransactionsGet200ResponseClientReferenceInformation } from './tss-v2-transactions-get200-response-client-reference-information';
-import { TssV2TransactionsGet200ResponseConsumerAuthenticationInformation } from './tss-v2-transactions-get200-response-consumer-authentication-information';
-import { TssV2TransactionsGet200ResponseDeviceInformation } from './tss-v2-transactions-get200-response-device-information';
-import { TssV2TransactionsGet200ResponseErrorInformation } from './tss-v2-transactions-get200-response-error-information';
-import { TssV2TransactionsGet200ResponseInstallmentInformation } from './tss-v2-transactions-get200-response-installment-information';
-import { TssV2TransactionsGet200ResponseLinks } from './tss-v2-transactions-get200-response-links';
-import { TssV2TransactionsGet200ResponseMerchantInformation } from './tss-v2-transactions-get200-response-merchant-information';
-import { TssV2TransactionsGet200ResponseOrderInformation } from './tss-v2-transactions-get200-response-order-information';
-import { TssV2TransactionsGet200ResponsePaymentInformation } from './tss-v2-transactions-get200-response-payment-information';
-import { TssV2TransactionsGet200ResponsePaymentInsightsInformation } from './tss-v2-transactions-get200-response-payment-insights-information';
-import { TssV2TransactionsGet200ResponsePointOfSaleInformation } from './tss-v2-transactions-get200-response-point-of-sale-information';
-import { TssV2TransactionsGet200ResponseProcessingInformation } from './tss-v2-transactions-get200-response-processing-information';
-import { TssV2TransactionsGet200ResponseProcessorInformation } from './tss-v2-transactions-get200-response-processor-information';
-import { TssV2TransactionsGet200ResponseRiskInformation } from './tss-v2-transactions-get200-response-risk-information';
-import { TssV2TransactionsGet200ResponseSenderInformation } from './tss-v2-transactions-get200-response-sender-information';
-import { TssV2TransactionsGet200ResponseTokenInformation } from './tss-v2-transactions-get200-response-token-information';
-import { TssV2TransactionsPost201ResponseEmbeddedFraudMarkingInformation } from './tss-v2-transactions-post201-response-embedded-fraud-marking-information';
 /**
  * 
  * @export
@@ -70,128 +49,128 @@ export interface TssV2TransactionsGet200Response {
     submitTimeUTC?: string;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseApplicationInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    applicationInformation?: TssV2TransactionsGet200ResponseApplicationInformation;
+    applicationInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseBuyerInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    buyerInformation?: TssV2TransactionsGet200ResponseBuyerInformation;
+    buyerInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseClientReferenceInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    clientReferenceInformation?: TssV2TransactionsGet200ResponseClientReferenceInformation;
+    clientReferenceInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseConsumerAuthenticationInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    consumerAuthenticationInformation?: TssV2TransactionsGet200ResponseConsumerAuthenticationInformation;
+    consumerAuthenticationInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseDeviceInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    deviceInformation?: TssV2TransactionsGet200ResponseDeviceInformation;
+    deviceInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseErrorInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    errorInformation?: TssV2TransactionsGet200ResponseErrorInformation;
+    errorInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseInstallmentInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    installmentInformation?: TssV2TransactionsGet200ResponseInstallmentInformation;
+    installmentInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsPost201ResponseEmbeddedFraudMarkingInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    fraudMarkingInformation?: TssV2TransactionsPost201ResponseEmbeddedFraudMarkingInformation;
+    fraudMarkingInformation?: any;
     /**
      * 
-     * @type {Ptsv2paymentsHealthCareInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    healthCareInformation?: Ptsv2paymentsHealthCareInformation;
+    healthCareInformation?: any;
     /**
      * The object containing the custom data that the merchant defines. 
-     * @type {Array<Ptsv2paymentsMerchantDefinedInformation>}
+     * @type {Array<any>}
      * @memberof TssV2TransactionsGet200Response
      */
-    merchantDefinedInformation?: Array<Ptsv2paymentsMerchantDefinedInformation>;
+    merchantDefinedInformation?: Array<any>;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseMerchantInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    merchantInformation?: TssV2TransactionsGet200ResponseMerchantInformation;
+    merchantInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseOrderInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    orderInformation?: TssV2TransactionsGet200ResponseOrderInformation;
+    orderInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponsePaymentInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    paymentInformation?: TssV2TransactionsGet200ResponsePaymentInformation;
+    paymentInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponsePaymentInsightsInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    paymentInsightsInformation?: TssV2TransactionsGet200ResponsePaymentInsightsInformation;
+    paymentInsightsInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseProcessingInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    processingInformation?: TssV2TransactionsGet200ResponseProcessingInformation;
+    processingInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseProcessorInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    processorInformation?: TssV2TransactionsGet200ResponseProcessorInformation;
+    processorInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponsePointOfSaleInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    pointOfSaleInformation?: TssV2TransactionsGet200ResponsePointOfSaleInformation;
+    pointOfSaleInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseRiskInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    riskInformation?: TssV2TransactionsGet200ResponseRiskInformation;
+    riskInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseSenderInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    senderInformation?: TssV2TransactionsGet200ResponseSenderInformation;
+    senderInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseTokenInformation}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    tokenInformation?: TssV2TransactionsGet200ResponseTokenInformation;
+    tokenInformation?: any;
     /**
      * 
-     * @type {TssV2TransactionsGet200ResponseLinks}
+     * @type {any}
      * @memberof TssV2TransactionsGet200Response
      */
-    links?: TssV2TransactionsGet200ResponseLinks;
+    links?: any;
 }

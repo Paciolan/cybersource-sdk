@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { V1FileDetailsGet200ResponseFileDetails } from './v1-file-details-get200-response-file-details';
-import { V1FileDetailsGet200ResponseLinks } from './v1-file-details-get200-response-links';
 /**
  * 
  * @export
@@ -21,14 +19,14 @@ import { V1FileDetailsGet200ResponseLinks } from './v1-file-details-get200-respo
 export interface V1FileDetailsGet200Response {
     /**
      * 
-     * @type {Array<V1FileDetailsGet200ResponseFileDetails>}
+     * @type {Array<any>}
      * @memberof V1FileDetailsGet200Response
      */
-    fileDetails?: Array<V1FileDetailsGet200ResponseFileDetails>;
+    fileDetails?: Array<any>;
     /**
      * 
-     * @type {V1FileDetailsGet200ResponseLinks}
+     * @type {any}
      * @memberof V1FileDetailsGet200Response
      */
-    links?: V1FileDetailsGet200ResponseLinks;
+    links?: any;
 }

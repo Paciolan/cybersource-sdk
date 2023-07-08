@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PtsV2RefundsVoidsPost201ResponseLinks } from './pts-v2-refunds-voids-post201-response-links';
-import { TssV2TransactionsPost201ResponseEmbedded } from './tss-v2-transactions-post201-response-embedded';
 /**
  * 
  * @export
@@ -93,14 +91,14 @@ export interface TssV2TransactionsPost201Response {
     submitTimeUtc?: string;
     /**
      * 
-     * @type {TssV2TransactionsPost201ResponseEmbedded}
+     * @type {any}
      * @memberof TssV2TransactionsPost201Response
      */
-    embedded?: TssV2TransactionsPost201ResponseEmbedded;
+    embedded?: any;
     /**
      * 
-     * @type {PtsV2RefundsVoidsPost201ResponseLinks}
+     * @type {any}
      * @memberof TssV2TransactionsPost201Response
      */
-    links?: PtsV2RefundsVoidsPost201ResponseLinks;
+    links?: any;
 }

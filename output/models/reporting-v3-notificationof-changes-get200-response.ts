@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges } from './reporting-v3-notificationof-changes-get200-response-notification-of-changes';
 /**
  * 
  * @export
@@ -20,8 +19,8 @@ import { ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges } f
 export interface ReportingV3NotificationofChangesGet200Response {
     /**
      * List of Notification Of Change Info values
-     * @type {Array<ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges>}
+     * @type {Array<any>}
      * @memberof ReportingV3NotificationofChangesGet200Response
      */
-    notificationOfChanges?: Array<ReportingV3NotificationofChangesGet200ResponseNotificationOfChanges>;
+    notificationOfChanges?: Array<any>;
 }

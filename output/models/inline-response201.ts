@@ -11,9 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Tmsv2customersEmbeddedDefaultShippingAddressLinks } from './tmsv2customers-embedded-default-shipping-address-links';
-import { Tmsv2customersEmbeddedDefaultShippingAddressMetadata } from './tmsv2customers-embedded-default-shipping-address-metadata';
-import { Tmsv2customersEmbeddedDefaultShippingAddressShipTo } from './tmsv2customers-embedded-default-shipping-address-ship-to';
 /**
  * 
  * @export
@@ -22,10 +19,10 @@ import { Tmsv2customersEmbeddedDefaultShippingAddressShipTo } from './tmsv2custo
 export interface InlineResponse201 {
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultShippingAddressLinks}
+     * @type {any}
      * @memberof InlineResponse201
      */
-    links?: Tmsv2customersEmbeddedDefaultShippingAddressLinks;
+    links?: any;
     /**
      * The id of the Shipping Address Token.
      * @type {string}
@@ -40,14 +37,14 @@ export interface InlineResponse201 {
     _default?: boolean;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultShippingAddressShipTo}
+     * @type {any}
      * @memberof InlineResponse201
      */
-    shipTo?: Tmsv2customersEmbeddedDefaultShippingAddressShipTo;
+    shipTo?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultShippingAddressMetadata}
+     * @type {any}
      * @memberof InlineResponse201
      */
-    metadata?: Tmsv2customersEmbeddedDefaultShippingAddressMetadata;
+    metadata?: any;
 }

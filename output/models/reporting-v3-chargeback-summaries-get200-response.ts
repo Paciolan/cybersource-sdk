@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries } from './reporting-v3-chargeback-summaries-get200-response-chargeback-summaries';
 /**
  * 
  * @export
@@ -38,8 +37,8 @@ export interface ReportingV3ChargebackSummariesGet200Response {
     endTime?: string;
     /**
      * List of Summary values
-     * @type {Array<ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries>}
+     * @type {Array<any>}
      * @memberof ReportingV3ChargebackSummariesGet200Response
      */
-    chargebackSummaries?: Array<ReportingV3ChargebackSummariesGet200ResponseChargebackSummaries>;
+    chargebackSummaries?: Array<any>;
 }

@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ReportSubscriptionsNameDelete400ResponseDetails } from './reporting-v3-report-subscriptions-name-delete400-response-details';
 /**
  * HTTP status code for client application
  * @export
@@ -38,8 +37,8 @@ export interface ReportingV3PaymentBatchSummariesGet200Response1 {
     message: string;
     /**
      * Error field list 
-     * @type {Array<ReportingV3ReportSubscriptionsNameDelete400ResponseDetails>}
+     * @type {Array<any>}
      * @memberof ReportingV3PaymentBatchSummariesGet200Response1
      */
-    details: Array<ReportingV3ReportSubscriptionsNameDelete400ResponseDetails>;
+    details: Array<any>;
 }

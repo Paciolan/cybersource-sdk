@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { UmsV1UsersGet200ResponseUsers } from './ums-v1-users-get200-response-users';
 /**
  * 
  * @export
@@ -20,8 +19,8 @@ import { UmsV1UsersGet200ResponseUsers } from './ums-v1-users-get200-response-us
 export interface UmsV1UsersGet200Response {
     /**
      * 
-     * @type {Array<UmsV1UsersGet200ResponseUsers>}
+     * @type {Array<any>}
      * @memberof UmsV1UsersGet200Response
      */
-    users?: Array<UmsV1UsersGet200ResponseUsers>;
+    users?: Array<any>;
 }

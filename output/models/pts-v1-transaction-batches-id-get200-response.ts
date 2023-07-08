@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PtsV1TransactionBatchesIdGet200ResponseLinks } from './pts-v1-transaction-batches-id-get200-response-links';
 /**
  * 
  * @export
@@ -62,8 +61,8 @@ export interface PtsV1TransactionBatchesIdGet200Response {
     status?: string;
     /**
      * 
-     * @type {PtsV1TransactionBatchesIdGet200ResponseLinks}
+     * @type {any}
      * @memberof PtsV1TransactionBatchesIdGet200Response
      */
-    links?: PtsV1TransactionBatchesIdGet200ResponseLinks;
+    links?: any;
 }

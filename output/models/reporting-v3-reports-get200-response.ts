@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ReportsGet200ResponseReportSearchResults } from './reporting-v3-reports-get200-response-report-search-results';
 /**
  * 
  * @export
@@ -20,8 +19,8 @@ import { ReportingV3ReportsGet200ResponseReportSearchResults } from './reporting
 export interface ReportingV3ReportsGet200Response {
     /**
      * 
-     * @type {Array<ReportingV3ReportsGet200ResponseReportSearchResults>}
+     * @type {Array<any>}
      * @memberof ReportingV3ReportsGet200Response
      */
-    reportSearchResults?: Array<ReportingV3ReportsGet200ResponseReportSearchResults>;
+    reportSearchResults?: Array<any>;
 }

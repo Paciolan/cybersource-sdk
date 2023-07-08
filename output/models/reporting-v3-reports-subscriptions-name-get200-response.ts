@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Reportingv3reportsReportPreferences } from './reportingv3reports-report-preferences';
 /**
  * Subscription Details
  * @export
@@ -91,11 +90,11 @@ export interface ReportingV3ReportsSubscriptionsNameGet200Response {
      */
     reportFilters?: { [key: string]: Array<string>; };
     /**
-     * 
-     * @type {Reportingv3reportsReportPreferences}
+     * Report Preferences
+     * @type {any}
      * @memberof ReportingV3ReportsSubscriptionsNameGet200Response
      */
-    reportPreferences?: Reportingv3reportsReportPreferences;
+    reportPreferences?: any;
     /**
      * Id for the selected group.
      * @type {string}

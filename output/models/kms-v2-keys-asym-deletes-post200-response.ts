@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { KmsV2KeysAsymDeletesPost200ResponseKeyInformation } from './kms-v2-keys-asym-deletes-post200-response-key-information';
-import { Kmsv2keyssymClientReferenceInformation } from './kmsv2keyssym-client-reference-information';
 /**
  * 
  * @export
@@ -27,14 +25,14 @@ export interface KmsV2KeysAsymDeletesPost200Response {
     submitTimeUtc?: string;
     /**
      * 
-     * @type {Kmsv2keyssymClientReferenceInformation}
+     * @type {any}
      * @memberof KmsV2KeysAsymDeletesPost200Response
      */
-    clientReferenceInformation?: Kmsv2keyssymClientReferenceInformation;
+    clientReferenceInformation?: any;
     /**
      * 
-     * @type {Array<KmsV2KeysAsymDeletesPost200ResponseKeyInformation>}
+     * @type {Array<any>}
      * @memberof KmsV2KeysAsymDeletesPost200Response
      */
-    keyInformation?: Array<KmsV2KeysAsymDeletesPost200ResponseKeyInformation>;
+    keyInformation?: Array<any>;
 }

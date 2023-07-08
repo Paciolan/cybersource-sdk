@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PtsV1TransactionBatchesGet500ResponseErrorInformation } from './pts-v1-transaction-batches-get500-response-error-information';
 /**
  * 
  * @export
@@ -20,10 +19,10 @@ import { PtsV1TransactionBatchesGet500ResponseErrorInformation } from './pts-v1-
 export interface PtsV1TransactionBatchDetailsGet502Response {
     /**
      * 
-     * @type {PtsV1TransactionBatchesGet500ResponseErrorInformation}
+     * @type {any}
      * @memberof PtsV1TransactionBatchDetailsGet502Response
      */
-    errorInformation?: PtsV1TransactionBatchesGet500ResponseErrorInformation;
+    errorInformation?: any;
     /**
      * Time of request in UTC. Format: `YYYY-MM-DDThh:mm:ssZ` **Example** `2016-08-11T22:47:57Z` equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The `T` separates the date and the time. The `Z` indicates UTC.  Returned by Cybersource for all services. 
      * @type {string}

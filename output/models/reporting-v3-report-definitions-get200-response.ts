@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ReportDefinitionsGet200ResponseReportDefinitions } from './reporting-v3-report-definitions-get200-response-report-definitions';
 /**
  * 
  * @export
@@ -20,8 +19,8 @@ import { ReportingV3ReportDefinitionsGet200ResponseReportDefinitions } from './r
 export interface ReportingV3ReportDefinitionsGet200Response {
     /**
      * 
-     * @type {Array<ReportingV3ReportDefinitionsGet200ResponseReportDefinitions>}
+     * @type {Array<any>}
      * @memberof ReportingV3ReportDefinitionsGet200Response
      */
-    reportDefinitions?: Array<ReportingV3ReportDefinitionsGet200ResponseReportDefinitions>;
+    reportDefinitions?: Array<any>;
 }

@@ -11,12 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3PurchaseRefundDetailsGet200ResponseAuthorizations } from './reporting-v3-purchase-refund-details-get200-response-authorizations';
-import { ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails } from './reporting-v3-purchase-refund-details-get200-response-fee-and-funding-details';
-import { ReportingV3PurchaseRefundDetailsGet200ResponseOthers } from './reporting-v3-purchase-refund-details-get200-response-others';
-import { ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails } from './reporting-v3-purchase-refund-details-get200-response-request-details';
-import { ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses } from './reporting-v3-purchase-refund-details-get200-response-settlement-statuses';
-import { ReportingV3PurchaseRefundDetailsGet200ResponseSettlements } from './reporting-v3-purchase-refund-details-get200-response-settlements';
 /**
  * 
  * @export
@@ -43,38 +37,38 @@ export interface ReportingV3PurchaseRefundDetailsGet200Response {
     pageResults?: number;
     /**
      * List of Request Info values
-     * @type {Array<ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails>}
+     * @type {Array<any>}
      * @memberof ReportingV3PurchaseRefundDetailsGet200Response
      */
-    requestDetails?: Array<ReportingV3PurchaseRefundDetailsGet200ResponseRequestDetails>;
+    requestDetails?: Array<any>;
     /**
      * List of Settlement Info values
-     * @type {Array<ReportingV3PurchaseRefundDetailsGet200ResponseSettlements>}
+     * @type {Array<any>}
      * @memberof ReportingV3PurchaseRefundDetailsGet200Response
      */
-    settlements?: Array<ReportingV3PurchaseRefundDetailsGet200ResponseSettlements>;
+    settlements?: Array<any>;
     /**
      * List of Authorization Info values
-     * @type {Array<ReportingV3PurchaseRefundDetailsGet200ResponseAuthorizations>}
+     * @type {Array<any>}
      * @memberof ReportingV3PurchaseRefundDetailsGet200Response
      */
-    authorizations?: Array<ReportingV3PurchaseRefundDetailsGet200ResponseAuthorizations>;
+    authorizations?: Array<any>;
     /**
      * List of Fee Funding Info values
-     * @type {Array<ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails>}
+     * @type {Array<any>}
      * @memberof ReportingV3PurchaseRefundDetailsGet200Response
      */
-    feeAndFundingDetails?: Array<ReportingV3PurchaseRefundDetailsGet200ResponseFeeAndFundingDetails>;
+    feeAndFundingDetails?: Array<any>;
     /**
      * List of Other Info values
-     * @type {Array<ReportingV3PurchaseRefundDetailsGet200ResponseOthers>}
+     * @type {Array<any>}
      * @memberof ReportingV3PurchaseRefundDetailsGet200Response
      */
-    others?: Array<ReportingV3PurchaseRefundDetailsGet200ResponseOthers>;
+    others?: Array<any>;
     /**
      * List of Settlement Status Info values
-     * @type {Array<ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses>}
+     * @type {Array<any>}
      * @memberof ReportingV3PurchaseRefundDetailsGet200Response
      */
-    settlementStatuses?: Array<ReportingV3PurchaseRefundDetailsGet200ResponseSettlementStatuses>;
+    settlementStatuses?: Array<any>;
 }

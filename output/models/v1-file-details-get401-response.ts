@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse4001Fields } from './inline-response4001-fields';
 /**
  * Error Bean
  * @export
@@ -50,8 +49,8 @@ export interface V1FileDetailsGet401Response {
     detail?: string;
     /**
      * Error fields List
-     * @type {Array<InlineResponse4001Fields>}
+     * @type {Array<any>}
      * @memberof V1FileDetailsGet401Response
      */
-    fields?: Array<InlineResponse4001Fields>;
+    fields?: Array<any>;
 }

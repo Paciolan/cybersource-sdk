@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { RiskV1AuthenticationSetupsPost201ResponseErrorInformationDetails } from './risk-v1-authentication-setups-post201-response-error-information-details';
 /**
  * 
  * @export
@@ -38,8 +37,8 @@ export interface TssV2TransactionsPost400Response {
     message?: string;
     /**
      * 
-     * @type {Array<RiskV1AuthenticationSetupsPost201ResponseErrorInformationDetails>}
+     * @type {Array<any>}
      * @memberof TssV2TransactionsPost400Response
      */
-    details?: Array<RiskV1AuthenticationSetupsPost201ResponseErrorInformationDetails>;
+    details?: Array<any>;
 }

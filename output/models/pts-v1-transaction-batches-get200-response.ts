@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PtsV1TransactionBatchesGet200ResponseLinks } from './pts-v1-transaction-batches-get200-response-links';
-import { PtsV1TransactionBatchesGet200ResponseTransactionBatches } from './pts-v1-transaction-batches-get200-response-transaction-batches';
 /**
  * 
  * @export
@@ -21,16 +19,16 @@ import { PtsV1TransactionBatchesGet200ResponseTransactionBatches } from './pts-v
 export interface PtsV1TransactionBatchesGet200Response {
     /**
      * 
-     * @type {Array<PtsV1TransactionBatchesGet200ResponseTransactionBatches>}
+     * @type {Array<any>}
      * @memberof PtsV1TransactionBatchesGet200Response
      */
-    transactionBatches?: Array<PtsV1TransactionBatchesGet200ResponseTransactionBatches>;
+    transactionBatches?: Array<any>;
     /**
      * 
-     * @type {PtsV1TransactionBatchesGet200ResponseLinks}
+     * @type {any}
      * @memberof PtsV1TransactionBatchesGet200Response
      */
-    links?: PtsV1TransactionBatchesGet200ResponseLinks;
+    links?: any;
     /**
      * Time of request in UTC. Format: `YYYY-MM-DDThh:mm:ssZ` **Example** `2016-08-11T22:47:57Z` equals August 11, 2016, at 22:47:57 (10:47:57 p.m.). The `T` separates the date and the time. The `Z` indicates UTC.  Returned by Cybersource for all services. 
      * @type {string}

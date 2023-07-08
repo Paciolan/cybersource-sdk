@@ -11,16 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentBankAccount } from './tmsv2customers-embedded-default-payment-instrument-bank-account';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentBillTo } from './tmsv2customers-embedded-default-payment-instrument-bill-to';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentBuyerInformation } from './tmsv2customers-embedded-default-payment-instrument-buyer-information';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentCard } from './tmsv2customers-embedded-default-payment-instrument-card';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbedded } from './tmsv2customers-embedded-default-payment-instrument-embedded';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentInstrumentIdentifier } from './tmsv2customers-embedded-default-payment-instrument-instrument-identifier';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentLinks } from './tmsv2customers-embedded-default-payment-instrument-links';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentMerchantInformation } from './tmsv2customers-embedded-default-payment-instrument-merchant-information';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentMetadata } from './tmsv2customers-embedded-default-payment-instrument-metadata';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentProcessingInformation } from './tmsv2customers-embedded-default-payment-instrument-processing-information';
 /**
  * 
  * @export
@@ -29,10 +19,10 @@ import { Tmsv2customersEmbeddedDefaultPaymentInstrumentProcessingInformation } f
 export interface InlineResponse2011 {
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentLinks}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    links?: Tmsv2customersEmbeddedDefaultPaymentInstrumentLinks;
+    links?: any;
     /**
      * The id of the Payment Instrument Token.
      * @type {string}
@@ -59,56 +49,56 @@ export interface InlineResponse2011 {
     state?: string;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentBankAccount}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    bankAccount?: Tmsv2customersEmbeddedDefaultPaymentInstrumentBankAccount;
+    bankAccount?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentCard}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    card?: Tmsv2customersEmbeddedDefaultPaymentInstrumentCard;
+    card?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentBuyerInformation}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    buyerInformation?: Tmsv2customersEmbeddedDefaultPaymentInstrumentBuyerInformation;
+    buyerInformation?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentBillTo}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    billTo?: Tmsv2customersEmbeddedDefaultPaymentInstrumentBillTo;
+    billTo?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentProcessingInformation}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    processingInformation?: Tmsv2customersEmbeddedDefaultPaymentInstrumentProcessingInformation;
+    processingInformation?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentMerchantInformation}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    merchantInformation?: Tmsv2customersEmbeddedDefaultPaymentInstrumentMerchantInformation;
+    merchantInformation?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentInstrumentIdentifier}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    instrumentIdentifier?: Tmsv2customersEmbeddedDefaultPaymentInstrumentInstrumentIdentifier;
+    instrumentIdentifier?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentMetadata}
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    metadata?: Tmsv2customersEmbeddedDefaultPaymentInstrumentMetadata;
+    metadata?: any;
     /**
-     * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbedded}
+     * Additional resources for the Payment Instrument token. 
+     * @type {any}
      * @memberof InlineResponse2011
      */
-    embedded?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbedded;
+    embedded?: any;
 }

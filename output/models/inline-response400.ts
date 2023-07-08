@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InlineResponse400Errors } from './inline-response400-errors';
 /**
  * 
  * @export
@@ -20,8 +19,8 @@ import { InlineResponse400Errors } from './inline-response400-errors';
 export interface InlineResponse400 {
     /**
      * 
-     * @type {Array<InlineResponse400Errors>}
+     * @type {Array<any>}
      * @memberof InlineResponse400
      */
-    errors?: Array<InlineResponse400Errors>;
+    errors?: Array<any>;
 }

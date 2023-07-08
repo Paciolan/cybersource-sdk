@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PtsV2IncrementalAuthorizationPatch201ResponseClientReferenceInformation } from './pts-v2-incremental-authorization-patch201-response-client-reference-information';
-import { VasV2TaxVoid200ResponseVoidAmountDetails } from './vas-v2-tax-void200-response-void-amount-details';
 /**
  * 
  * @export
@@ -39,14 +37,14 @@ export interface VasV2TaxVoid200Response {
     status?: string;
     /**
      * 
-     * @type {PtsV2IncrementalAuthorizationPatch201ResponseClientReferenceInformation}
+     * @type {any}
      * @memberof VasV2TaxVoid200Response
      */
-    clientReferenceInformation?: PtsV2IncrementalAuthorizationPatch201ResponseClientReferenceInformation;
+    clientReferenceInformation?: any;
     /**
      * 
-     * @type {VasV2TaxVoid200ResponseVoidAmountDetails}
+     * @type {any}
      * @memberof VasV2TaxVoid200Response
      */
-    voidAmountDetails?: VasV2TaxVoid200ResponseVoidAmountDetails;
+    voidAmountDetails?: any;
 }

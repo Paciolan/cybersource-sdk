@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails } from './reporting-v3-interchange-clearing-level-details-get200-response-interchange-clearing-level-details';
 /**
  * 
  * @export
@@ -32,8 +31,8 @@ export interface ReportingV3InterchangeClearingLevelDetailsGet200Response {
     endDate?: Date;
     /**
      * List of InterchangeClearingLevelDetail
-     * @type {Array<ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails>}
+     * @type {Array<any>}
      * @memberof ReportingV3InterchangeClearingLevelDetailsGet200Response
      */
-    interchangeClearingLevelDetails?: Array<ReportingV3InterchangeClearingLevelDetailsGet200ResponseInterchangeClearingLevelDetails>;
+    interchangeClearingLevelDetails?: Array<any>;
 }

@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3NetFundingsGet200ResponseNetFundingSummaries } from './reporting-v3-net-fundings-get200-response-net-funding-summaries';
-import { ReportingV3NetFundingsGet200ResponseTotalPurchases } from './reporting-v3-net-fundings-get200-response-total-purchases';
 /**
  * 
  * @export
@@ -33,38 +31,38 @@ export interface ReportingV3NetFundingsGet200Response {
     endTime?: Date;
     /**
      * List of Netfunding summary objects
-     * @type {Array<ReportingV3NetFundingsGet200ResponseNetFundingSummaries>}
+     * @type {Array<any>}
      * @memberof ReportingV3NetFundingsGet200Response
      */
-    netFundingSummaries?: Array<ReportingV3NetFundingsGet200ResponseNetFundingSummaries>;
+    netFundingSummaries?: Array<any>;
     /**
      * List of total purchases currency wise
-     * @type {Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>}
+     * @type {Array<any>}
      * @memberof ReportingV3NetFundingsGet200Response
      */
-    totalPurchases?: Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>;
+    totalPurchases?: Array<any>;
     /**
      * List of total refunds currency wise
-     * @type {Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>}
+     * @type {Array<any>}
      * @memberof ReportingV3NetFundingsGet200Response
      */
-    totalRefunds?: Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>;
+    totalRefunds?: Array<any>;
     /**
      * List of total fees currency wise
-     * @type {Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>}
+     * @type {Array<any>}
      * @memberof ReportingV3NetFundingsGet200Response
      */
-    totalFees?: Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>;
+    totalFees?: Array<any>;
     /**
      * List of total chargebacks currency wise
-     * @type {Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>}
+     * @type {Array<any>}
      * @memberof ReportingV3NetFundingsGet200Response
      */
-    totalChargebacks?: Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>;
+    totalChargebacks?: Array<any>;
     /**
      * List of new total currency wise
-     * @type {Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>}
+     * @type {Array<any>}
      * @memberof ReportingV3NetFundingsGet200Response
      */
-    netTotal?: Array<ReportingV3NetFundingsGet200ResponseTotalPurchases>;
+    netTotal?: Array<any>;
 }

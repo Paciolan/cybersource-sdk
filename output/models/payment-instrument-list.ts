@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { PaymentInstrumentListEmbedded } from './payment-instrument-list-embedded';
-import { PaymentInstrumentListLinks } from './payment-instrument-list-links';
 /**
  * 
  * @export
@@ -21,10 +19,10 @@ import { PaymentInstrumentListLinks } from './payment-instrument-list-links';
 export interface PaymentInstrumentList {
     /**
      * 
-     * @type {PaymentInstrumentListLinks}
+     * @type {any}
      * @memberof PaymentInstrumentList
      */
-    links?: PaymentInstrumentListLinks;
+    links?: any;
     /**
      * The offset parameter supplied in the request.
      * @type {number}
@@ -50,9 +48,9 @@ export interface PaymentInstrumentList {
      */
     total?: number;
     /**
-     * 
-     * @type {PaymentInstrumentListEmbedded}
+     * Payment Instrument Resources. 
+     * @type {any}
      * @memberof PaymentInstrumentList
      */
-    embedded?: PaymentInstrumentListEmbedded;
+    embedded?: any;
 }

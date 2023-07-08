@@ -11,8 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ReportDefinitionsNameGet200ResponseAttributes } from './reporting-v3-report-definitions-name-get200-response-attributes';
-import { ReportingV3ReportDefinitionsNameGet200ResponseDefaultSettings } from './reporting-v3-report-definitions-name-get200-response-default-settings';
 /**
  * 
  * @export
@@ -39,10 +37,10 @@ export interface ReportingV3ReportDefinitionsNameGet200Response {
     reportDefintionName?: string;
     /**
      * 
-     * @type {Array<ReportingV3ReportDefinitionsNameGet200ResponseAttributes>}
+     * @type {Array<any>}
      * @memberof ReportingV3ReportDefinitionsNameGet200Response
      */
-    attributes?: Array<ReportingV3ReportDefinitionsNameGet200ResponseAttributes>;
+    attributes?: Array<any>;
     /**
      * 
      * @type {Array<string>}
@@ -57,10 +55,10 @@ export interface ReportingV3ReportDefinitionsNameGet200Response {
     description?: string;
     /**
      * 
-     * @type {ReportingV3ReportDefinitionsNameGet200ResponseDefaultSettings}
+     * @type {any}
      * @memberof ReportingV3ReportDefinitionsNameGet200Response
      */
-    defaultSettings?: ReportingV3ReportDefinitionsNameGet200ResponseDefaultSettings;
+    defaultSettings?: any;
     /**
      * 'The subscription type for which report definition is required. By default the type will be CUSTOM.' Valid Values: - 'CLASSIC' - 'CUSTOM' - 'STANDARD' 
      * @type {string}

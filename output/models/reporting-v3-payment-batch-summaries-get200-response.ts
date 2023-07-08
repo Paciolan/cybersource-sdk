@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries } from './reporting-v3-payment-batch-summaries-get200-response-payment-batch-summaries';
 /**
  * 
  * @export
@@ -32,8 +31,8 @@ export interface ReportingV3PaymentBatchSummariesGet200Response {
     endTime?: Date;
     /**
      * 
-     * @type {Array<ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries>}
+     * @type {Array<any>}
      * @memberof ReportingV3PaymentBatchSummariesGet200Response
      */
-    paymentBatchSummaries?: Array<ReportingV3PaymentBatchSummariesGet200ResponsePaymentBatchSummaries>;
+    paymentBatchSummaries?: Array<any>;
 }

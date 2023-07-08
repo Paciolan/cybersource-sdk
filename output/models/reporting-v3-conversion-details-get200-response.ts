@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ConversionDetailsGet200ResponseConversionDetails } from './reporting-v3-conversion-details-get200-response-conversion-details';
 /**
  * 
  * @export
@@ -38,8 +37,8 @@ export interface ReportingV3ConversionDetailsGet200Response {
     endTime?: Date;
     /**
      * 
-     * @type {Array<ReportingV3ConversionDetailsGet200ResponseConversionDetails>}
+     * @type {Array<any>}
      * @memberof ReportingV3ConversionDetailsGet200Response
      */
-    conversionDetails?: Array<ReportingV3ConversionDetailsGet200ResponseConversionDetails>;
+    conversionDetails?: Array<any>;
 }

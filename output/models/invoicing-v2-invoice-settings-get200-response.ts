@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation } from './invoicing-v2-invoice-settings-get200-response-invoice-settings-information';
 /**
  * 
  * @export
@@ -26,8 +25,8 @@ export interface InvoicingV2InvoiceSettingsGet200Response {
     submitTimeUtc?: string;
     /**
      * 
-     * @type {InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation}
+     * @type {any}
      * @memberof InvoicingV2InvoiceSettingsGet200Response
      */
-    invoiceSettingsInformation?: InvoicingV2InvoiceSettingsGet200ResponseInvoiceSettingsInformation;
+    invoiceSettingsInformation?: any;
 }

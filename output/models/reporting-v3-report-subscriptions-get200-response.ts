@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { ReportingV3ReportSubscriptionsGet200ResponseSubscriptions } from './reporting-v3-report-subscriptions-get200-response-subscriptions';
 /**
  * 
  * @export
@@ -20,8 +19,8 @@ import { ReportingV3ReportSubscriptionsGet200ResponseSubscriptions } from './rep
 export interface ReportingV3ReportSubscriptionsGet200Response {
     /**
      * 
-     * @type {Array<ReportingV3ReportSubscriptionsGet200ResponseSubscriptions>}
+     * @type {Array<any>}
      * @memberof ReportingV3ReportSubscriptionsGet200Response
      */
-    subscriptions?: Array<ReportingV3ReportSubscriptionsGet200ResponseSubscriptions>;
+    subscriptions?: Array<any>;
 }

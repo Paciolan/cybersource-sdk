@@ -11,15 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Tmsv2customersBuyerInformation } from './tmsv2customers-buyer-information';
-import { Tmsv2customersClientReferenceInformation } from './tmsv2customers-client-reference-information';
-import { Tmsv2customersDefaultPaymentInstrument } from './tmsv2customers-default-payment-instrument';
-import { Tmsv2customersDefaultShippingAddress } from './tmsv2customers-default-shipping-address';
-import { Tmsv2customersEmbedded } from './tmsv2customers-embedded';
-import { Tmsv2customersLinks } from './tmsv2customers-links';
-import { Tmsv2customersMerchantDefinedInformation } from './tmsv2customers-merchant-defined-information';
-import { Tmsv2customersMetadata } from './tmsv2customers-metadata';
-import { Tmsv2customersObjectInformation } from './tmsv2customers-object-information';
 /**
  * 
  * @export
@@ -28,10 +19,10 @@ import { Tmsv2customersObjectInformation } from './tmsv2customers-object-informa
 export interface InlineResponse200 {
     /**
      * 
-     * @type {Tmsv2customersLinks}
+     * @type {any}
      * @memberof InlineResponse200
      */
-    links?: Tmsv2customersLinks;
+    links?: any;
     /**
      * The id of the Customer Token.
      * @type {string}
@@ -40,50 +31,50 @@ export interface InlineResponse200 {
     id?: string;
     /**
      * 
-     * @type {Tmsv2customersObjectInformation}
+     * @type {any}
      * @memberof InlineResponse200
      */
-    objectInformation?: Tmsv2customersObjectInformation;
+    objectInformation?: any;
     /**
      * 
-     * @type {Tmsv2customersBuyerInformation}
+     * @type {any}
      * @memberof InlineResponse200
      */
-    buyerInformation?: Tmsv2customersBuyerInformation;
+    buyerInformation?: any;
     /**
      * 
-     * @type {Tmsv2customersClientReferenceInformation}
+     * @type {any}
      * @memberof InlineResponse200
      */
-    clientReferenceInformation?: Tmsv2customersClientReferenceInformation;
+    clientReferenceInformation?: any;
     /**
      * Object containing the custom data that the merchant defines. 
-     * @type {Array<Tmsv2customersMerchantDefinedInformation>}
+     * @type {Array<any>}
      * @memberof InlineResponse200
      */
-    merchantDefinedInformation?: Array<Tmsv2customersMerchantDefinedInformation>;
+    merchantDefinedInformation?: Array<any>;
     /**
      * 
-     * @type {Tmsv2customersDefaultPaymentInstrument}
+     * @type {any}
      * @memberof InlineResponse200
      */
-    defaultPaymentInstrument?: Tmsv2customersDefaultPaymentInstrument;
+    defaultPaymentInstrument?: any;
     /**
      * 
-     * @type {Tmsv2customersDefaultShippingAddress}
+     * @type {any}
      * @memberof InlineResponse200
      */
-    defaultShippingAddress?: Tmsv2customersDefaultShippingAddress;
+    defaultShippingAddress?: any;
     /**
      * 
-     * @type {Tmsv2customersMetadata}
+     * @type {any}
      * @memberof InlineResponse200
      */
-    metadata?: Tmsv2customersMetadata;
+    metadata?: any;
     /**
-     * 
-     * @type {Tmsv2customersEmbedded}
+     * Additional resources for the Customer token. 
+     * @type {any}
      * @memberof InlineResponse200
      */
-    embedded?: Tmsv2customersEmbedded;
+    embedded?: any;
 }

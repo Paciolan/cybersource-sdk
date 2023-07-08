@@ -11,7 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { KmsV2KeysSymGet200ResponseKeyInformation } from './kms-v2-keys-sym-get200-response-key-information';
 /**
  * 
  * @export
@@ -31,9 +30,9 @@ export interface KmsV2KeysSymGet200Response {
      */
     status?: string;
     /**
-     * 
-     * @type {KmsV2KeysSymGet200ResponseKeyInformation}
+     * key information 
+     * @type {any}
      * @memberof KmsV2KeysSymGet200Response
      */
-    keyInformation?: KmsV2KeysSymGet200ResponseKeyInformation;
+    keyInformation?: any;
 }

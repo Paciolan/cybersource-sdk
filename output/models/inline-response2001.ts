@@ -11,14 +11,6 @@
  * https://github.com/swagger-api/swagger-codegen.git
  * Do not edit the class manually.
  */
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierBankAccount } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-bank-account';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierBillTo } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-bill-to';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierCard } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-card';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierIssuer } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-issuer';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierLinks } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-links';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierMetadata } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-metadata';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformation } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-processing-information';
-import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierTokenizedCard } from './tmsv2customers-embedded-default-payment-instrument-embedded-instrument-identifier-tokenized-card';
 /**
  * 
  * @export
@@ -27,10 +19,10 @@ import { Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentif
 export interface InlineResponse2001 {
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierLinks}
+     * @type {any}
      * @memberof InlineResponse2001
      */
-    links?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierLinks;
+    links?: any;
     /**
      * The id of the Instrument Identifier Token. 
      * @type {string}
@@ -56,45 +48,45 @@ export interface InlineResponse2001 {
      */
     type?: string;
     /**
-     * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierCard}
+     * The expirationMonth, expirationYear and securityCode is sent to the issuer as part of network token enrollment and is not stored under the Instrument Identifier token. 
+     * @type {any}
      * @memberof InlineResponse2001
      */
-    card?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierCard;
+    card?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierBankAccount}
+     * @type {any}
      * @memberof InlineResponse2001
      */
-    bankAccount?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierBankAccount;
+    bankAccount?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierTokenizedCard}
+     * @type {any}
      * @memberof InlineResponse2001
      */
-    tokenizedCard?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierTokenizedCard;
+    tokenizedCard?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierIssuer}
+     * @type {any}
      * @memberof InlineResponse2001
      */
-    issuer?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierIssuer;
+    issuer?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformation}
+     * @type {any}
      * @memberof InlineResponse2001
      */
-    processingInformation?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierProcessingInformation;
+    processingInformation?: any;
+    /**
+     * This information is sent to the issuer as part of network token enrollment and is not stored under the Instrument Identifier token. 
+     * @type {any}
+     * @memberof InlineResponse2001
+     */
+    billTo?: any;
     /**
      * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierBillTo}
+     * @type {any}
      * @memberof InlineResponse2001
      */
-    billTo?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierBillTo;
-    /**
-     * 
-     * @type {Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierMetadata}
-     * @memberof InlineResponse2001
-     */
-    metadata?: Tmsv2customersEmbeddedDefaultPaymentInstrumentEmbeddedInstrumentIdentifierMetadata;
+    metadata?: any;
 }
