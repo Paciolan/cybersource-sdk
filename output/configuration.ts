@@ -18,6 +18,8 @@ export interface ConfigurationParameters {
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
     basePath?: string;
     baseOptions?: any;
+    merchantKeyId?: string;
+    merchantsecretKey?: string;
 }
 
 export class Configuration {
@@ -62,6 +64,18 @@ export class Configuration {
      * @memberof Configuration
      */
     baseOptions?: any;
+    /**
+     * your shared secret key ID
+     * @type {string}
+     * @memberof Configuration
+     */
+    merchantKeyId?: string;
+    /**
+     * your shared secret key
+     * @type {string}
+     * @memberof Configuration
+     */
+    merchantsecretKey?: string;
 
     constructor(param: ConfigurationParameters = {}) {
         this.apiKey = param.apiKey;
@@ -70,5 +84,7 @@ export class Configuration {
         this.accessToken = param.accessToken;
         this.basePath = param.basePath;
         this.baseOptions = param.baseOptions;
+        this.merchantKeyId = param.merchantKeyId;
+        this.merchantsecretKey = param.merchantsecretKey;
     }
 }

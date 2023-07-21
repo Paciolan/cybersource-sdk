@@ -16,6 +16,7 @@ import globalAxios, {
   AxiosInstance,
   AxiosRequestConfig,
 } from "axios";
+import { AuthenticationHeader } from "../authentication/core/AuthenticationHeader";
 import { Configuration } from "../configuration";
 // Some imports not used depending on template conditions
 // @ts-ignore
@@ -99,6 +100,15 @@ export const PaymentsApiAxiosParamCreator = function (
       localVarRequestOptions.data = needsSerialization
         ? JSON.stringify(body !== undefined ? body : {})
         : body || "";
+
+      const authHeader = new AuthenticationHeader();
+      authHeader.setConfiguration(configuration);
+      localVarRequestOptions.headers = authHeader.callAuthenticationHeader(
+        localVarRequestOptions.method,
+        localVarPath,
+        localVarRequestOptions.data,
+        localVarRequestOptions.headers,
+      );
 
       return {
         url:

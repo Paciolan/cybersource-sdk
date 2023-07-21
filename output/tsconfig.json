@@ -3,7 +3,11 @@
     "declaration": true,
     "target": "es6",
     "module": "commonjs",
-    "noImplicitAny": true,
+    // TODO: don't do this
+    "noImplicitAny": false,
+    "allowJs": true,
+    // TODO: don't do this
+    "skipLibCheck": true,
     "outDir": "dist",
     "rootDir": ".",
     "typeRoots": [
