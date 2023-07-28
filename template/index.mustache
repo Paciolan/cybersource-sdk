@@ -1,0 +1,9 @@
+/* tslint:disable */
+/* eslint-disable */
+{{>licenseInfo}}
+
+export { BASE_PATH } from "./base"
+export * from "./api";
+export * from "./configuration";
+export * from "./models";
+{{#withSeparateModelsAndApi}}export * from "./{{tsModelPackage}}";{{/withSeparateModelsAndApi}}
