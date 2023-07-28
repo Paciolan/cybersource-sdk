@@ -27,6 +27,8 @@ jobs:
       #   uses: 'dudeofawesome/actions/node-setup@v1'
       - name: 'Use Node.js 📗'
         uses: 'actions/setup-node@v3'
+        with:
+          registry-url: 'https://registry.npmjs.org'
       - name: 'Install node modules 📥'
         uses: 'dudeofawesome/actions/npm-install@v1'
         with:
