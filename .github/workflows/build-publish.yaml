@@ -22,7 +22,6 @@ jobs:
 
       - name: 'Build 🏗️'
         run: './generate.sh'
-      - run: 'ls -lha; ls -lha output'
 
       # - name: 'Setup 🛎️'
       #   uses: 'dudeofawesome/actions/node-setup@v1'
@@ -42,9 +41,6 @@ jobs:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
         working-directory: 'output'
         run: |-
-          echo "pwd=$(pwd)"
-          ls -lha
-
           npm publish --access public
 
           echo "package_url=https://www.npmjs.com/package/$(jq --raw-output '.name' 'package.json')" >> "$GITHUB_OUTPUT"
