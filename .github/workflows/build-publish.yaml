@@ -1,0 +1,38 @@
+name: 'Build & Publish NPM package'
+
+on:
+  push:
+    branches:
+      - '*'
+
+permissions:
+  contents: 'read'
+
+jobs:
+  publish:
+    runs-on: 'ubuntu-latest'
+    steps:
+      - name: 'Build 🏗️'
+        run: 'pwd; ls -lha; ./generate'
+
+      # - name: 'Setup 🛎️'
+      #   uses: 'dudeofawesome/actions/node-setup@v1'
+      - name: 'Use Node.js 📗'
+        uses: 'actions/setup-node@v3'
+        with:
+          cache: 'npm'
+      - name: 'Install node modules 📥'
+        uses: 'dudeofawesome/actions/npm-install@v1'
+        with:
+          package-dir-path: 'output'
+
+      - name: 'Publish to NPM 🚀'
+        id: 'publish'
+        if: '${{ github.ref_name }} == ${{ github.event.repository.default_branch }}'
+        env:
+          NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
+        working-directory: 'output/dist'
+        run: |-
+          npm publish --access public
+
+          echo "package_url=https://www.npmjs.com/package/$(jq --raw-output '.name' 'package.json')" >> "$GITHUB_OUTPUT"
