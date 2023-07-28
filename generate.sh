@@ -17,6 +17,7 @@ function fetch_swagger_codegen_bin() {
   if [ ! -f "$swagger_codegen_bin_path" ]; then
     mkdir -p "$(dirname "$swagger_codegen_bin_path")"
     wget \
+      --no-verbose \
       "https://repo1.maven.org/maven2/io/swagger/codegen/v3/swagger-codegen-cli/$swagger_codegen_version/swagger-codegen-cli-$swagger_codegen_version.jar" \
       --output-document="$swagger_codegen_bin_path"
   fi
@@ -41,6 +42,7 @@ function fetch_official_cybersource_sdk() {
     )"
     mkdir -p "$(dirname "$cybersource_rest_client_node_path")"
     wget \
+      --no-verbose \
       "$tarball_url" \
       --output-document="$cybersource_rest_client_node_path.tar"
   fi
@@ -73,6 +75,7 @@ function update_openapi_spec() {
   if [ "${swagger_version[0]}" != "3" ]; then
     # convert spec to OpenAPI 3
     curl \
+      --silent \
       --location 'https://converter.swagger.io/api/convert' \
       --header 'Content-Type: application/json' \
       --data @"$cybersource_rest_client_node_path/generator/cybersource-rest-spec.json" \
