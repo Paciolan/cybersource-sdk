@@ -12,8 +12,17 @@ jobs:
   publish:
     runs-on: 'ubuntu-latest'
     steps:
+      - name: 'Checkout Repository 🛎️'
+        uses: 'actions/checkout@v3'
+      - name: 'Use Java'
+        uses: 'actions/setup-java@v3'
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
       - name: 'Build 🏗️'
-        run: 'pwd; ls -lha; ./generate'
+        run: './generate.sh'
+      - run: 'ls -lha; ls -lha output'
 
       # - name: 'Setup 🛎️'
       #   uses: 'dudeofawesome/actions/node-setup@v1'
@@ -31,8 +40,11 @@ jobs:
         if: '${{ github.ref_name }} == ${{ github.event.repository.default_branch }}'
         env:
           NODE_AUTH_TOKEN: '${{ secrets.NPM_AUTH_TOKEN }}'
-        working-directory: 'output/dist'
+        working-directory: 'output'
         run: |-
+          echo "pwd=$(pwd)"
+          ls -lha
+
           npm publish --access public
 
           echo "package_url=https://www.npmjs.com/package/$(jq --raw-output '.name' 'package.json')" >> "$GITHUB_OUTPUT"
