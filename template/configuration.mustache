@@ -2,6 +2,8 @@
 /* eslint-disable */
 {{>licenseInfo}}
 
+import { Logger } from 'winston';
+
 export interface ConfigurationParameters {
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
     username?: string;
@@ -9,9 +11,66 @@ export interface ConfigurationParameters {
     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
     basePath?: string;
     baseOptions?: any;
+
+    /*Common Parameters*/
+    authenticationType?: string;
+    url?: string;
+    requestHost?: string;
+    requestJsonPath?: string;
+    merchantID?: string;
+    requestType?: string;
+    requestTarget?: string;
+    requestJsonData?: Record<string, unknown>;
+
+    /* JWT Parameters*/
+    keysDirectory?: string;
+    keyAlias?: string;
+    keyPass?: string;
+    keyType?: string;
+    keyFilename?: string;
+    useHttpClient?: boolean;
+
+    /*HTTP Parameters*/
+    /**
+     * your shared secret key ID
+     * @type {string}
+     * @memberof Configuration
+     */
     merchantKeyId?: string;
+    /**
+     * your shared secret key
+     * @type {string}
+     * @memberof Configuration
+     */
     merchantsecretKey?: string;
-}
+
+    /* MetaKey Parameters */
+    useMetaKey?: boolean;
+    portfolioID?: string;
+
+    /* MutualAuth Parameters */
+    enableClientCert?: boolean;
+    clientCertDir?: string;
+    sslClientCert?: string;
+    privateKey?: string;
+
+    /* Intermediate Host */
+    intermediateHost?: string;
+
+    solutionId?: string;
+
+    logConfiguration?: {
+        enableLog?: boolean;
+        logDirectory?: string;
+        logFileName?: string;
+        logFileMaxSize?: string;
+        loggingLevel?: string;
+        maxLogFiles?: number;
+        enableMasking?: boolean;
+        hasExternalLogger?: boolean;
+        externalLogger?: Logger;
+    };
+  }
 
 export class Configuration {
     /**
@@ -55,6 +114,26 @@ export class Configuration {
      * @memberof Configuration
      */
     baseOptions?: any;
+
+    /*Common Parameters*/
+    authenticationType?: string;
+    url?: string;
+    requestHost?: string;
+    requestJsonPath?: string;
+    merchantID?: string;
+    requestType?: string;
+    requestTarget?: string;
+    requestJsonData?: Record<string, unknown>;
+
+    /* JWT Parameters*/
+    keysDirectory?: string;
+    keyAlias?: string;
+    keyPass?: string;
+    keyType?: string;
+    keyFilename?: string;
+    useHttpClient?: boolean;
+
+    /*HTTP Parameters*/
     /**
      * your shared secret key ID
      * @type {string}
@@ -68,6 +147,33 @@ export class Configuration {
      */
     merchantsecretKey?: string;
 
+    /* MetaKey Parameters */
+    useMetaKey?: boolean;
+    portfolioID?: string;
+
+    /* MutualAuth Parameters */
+    enableClientCert?: boolean;
+    clientCertDir?: string;
+    sslClientCert?: string;
+    privateKey?: string;
+
+    /* Intermediate Host */
+    intermediateHost?: string;
+
+    solutionId?: string;
+
+    logConfiguration?: {
+        enableLog?: boolean;
+        logDirectory?: string;
+        logFileName?: string;
+        logFileMaxSize?: string;
+        loggingLevel?: string;
+        maxLogFiles?: number;
+        enableMasking?: boolean;
+        hasExternalLogger?: boolean;
+        externalLogger?: Logger;
+    };
+
     constructor(param: ConfigurationParameters = {}) {
         this.apiKey = param.apiKey;
         this.username = param.username;
@@ -77,5 +183,44 @@ export class Configuration {
         this.baseOptions = param.baseOptions;
         this.merchantKeyId = param.merchantKeyId;
         this.merchantsecretKey = param.merchantsecretKey;
+
+        /*Common Parameters*/
+        this.authenticationType = param.authenticationType;
+        this.url;
+        this.requestHost;
+        this.requestJsonPath = param.requestJsonPath;
+        this.merchantID = param.merchantID;
+        this.requestType;
+        this.requestTarget;
+        this.requestJsonData;
+
+        /* JWT Parameters*/
+        this.keysDirectory = param.keysDirectory;
+        this.keyAlias = param.keyAlias;
+        this.keyPass = param.keyPass;
+        this.keyType;
+        this.keyFilename = param.keyFilename;
+        this.useHttpClient;
+
+        /*HTTP Parameters*/
+        this.merchantKeyId = param.merchantKeyId;
+        this.merchantsecretKey = param.merchantsecretKey;
+
+        /* MetaKey Parameters */
+        this.useMetaKey = param.useMetaKey;
+        this.portfolioID = param.portfolioID;
+
+        /* MutualAuth Parameters */
+        this.enableClientCert = param.enableClientCert;
+        this.clientCertDir = param.clientCertDir;
+        this.sslClientCert = param.sslClientCert;
+        this.privateKey = param.privateKey;
+
+        /* Intermediate Host */
+        this.intermediateHost = param.intermediateHost;
+
+        this.solutionId = param.solutionId;
+
+        this.logConfiguration = param.logConfiguration;
     }
 }
