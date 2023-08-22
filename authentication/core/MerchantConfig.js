@@ -3,7 +3,7 @@
 var Constants = require('../util/Constants');
 var Logger = require('../logging/Logger');
 var ApiException = require('../util/ApiException');
-var LogConfiguration = require('../logging/LogConfiguration');
+var { LogConfiguration } = require('../logging/LogConfiguration');
 
 /**
  * This function has all the merchentConfig properties getters and setters methods

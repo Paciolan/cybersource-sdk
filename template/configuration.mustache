@@ -3,6 +3,7 @@
 {{>licenseInfo}}
 
 import { Logger } from 'winston';
+import { LogConfiguration } from './authentication';
 
 export interface ConfigurationParameters {
     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
@@ -59,17 +60,7 @@ export interface ConfigurationParameters {
 
     solutionId?: string;
 
-    logConfiguration?: {
-        enableLog?: boolean;
-        logDirectory?: string;
-        logFileName?: string;
-        logFileMaxSize?: string;
-        loggingLevel?: string;
-        maxLogFiles?: number;
-        enableMasking?: boolean;
-        hasExternalLogger?: boolean;
-        externalLogger?: Logger;
-    };
+    logConfiguration?: LogConfiguration;
   }
 
 export class Configuration {
@@ -162,17 +153,7 @@ export class Configuration {
 
     solutionId?: string;
 
-    logConfiguration?: {
-        enableLog?: boolean;
-        logDirectory?: string;
-        logFileName?: string;
-        logFileMaxSize?: string;
-        loggingLevel?: string;
-        maxLogFiles?: number;
-        enableMasking?: boolean;
-        hasExternalLogger?: boolean;
-        externalLogger?: Logger;
-    };
+    logConfiguration?: LogConfiguration;
 
     constructor(param: ConfigurationParameters = {}) {
         this.apiKey = param.apiKey;

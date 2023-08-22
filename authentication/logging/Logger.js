@@ -3,7 +3,7 @@ const { format } = require('winston');
 const DataMasker = require('./SensitiveDataMasker');
 const { combine, timestamp, label, printf } = format;
 require('winston-daily-rotate-file');
-const ExternalLoggerWrapper = require('../logging/ExternalLoggerWrapper');
+const { ExternalLoggerWrapper } = require('../logging/ExternalLoggerWrapper');
 
 const maskedLoggingFormat = printf(({ level, message, label, timestamp }) => {
   return `[${timestamp}] [${level.toUpperCase()}] [${label}] : ${DataMasker.maskSensitiveData(message)}`;
