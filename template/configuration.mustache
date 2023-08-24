@@ -55,6 +55,8 @@ export interface ConfigurationParameters {
     sslClientCert?: string;
     privateKey?: string;
 
+    runEnvironment?: string;
+
     /* Intermediate Host */
     intermediateHost?: string;
 
@@ -148,6 +150,8 @@ export class Configuration {
     sslClientCert?: string;
     privateKey?: string;
 
+    runEnvironment?: string;
+
     /* Intermediate Host */
     intermediateHost?: string;
 
@@ -196,6 +200,8 @@ export class Configuration {
         this.clientCertDir = param.clientCertDir;
         this.sslClientCert = param.sslClientCert;
         this.privateKey = param.privateKey;
+
+        this.runEnvironment = param.runEnvironment;
 
         /* Intermediate Host */
         this.intermediateHost = param.intermediateHost;
