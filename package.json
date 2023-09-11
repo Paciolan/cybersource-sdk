@@ -1,5 +1,5 @@
 {
-  "name": "@dudeofawesome/cybersource-sdk",
+  "name": "@paciolan/cybersource-sdk",
   "description": "CyberSource REST API Typescript SDK",
   "version": "0.2.1",
   "keywords": [
