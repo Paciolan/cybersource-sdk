@@ -1,3 +1,5 @@
 /output/
 /bin/
 /tmp/
+/node_modules/
+*.tsbuildinfo
