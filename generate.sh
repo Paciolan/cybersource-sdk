@@ -30,8 +30,7 @@ function fetch_official_cybersource_sdk() {
   )"
 
   if [ "$cybersource_rest_client_node_version" != "$latest_release" ]; then
-    echo "$cybersource_rest_client_node_version" != "$latest_release"
-    >&2 echo -e "\033[1;33mThere is an update available for cybersource-rest-client-node: $cybersource_rest_client_node_version\033[0m"
+    >&2 echo -e "\033[1;33mThere is an update available for cybersource-rest-client-node: $latest_release\033[0m"
   fi
 
   # download the repo
@@ -99,7 +98,7 @@ function generate() {
   fi
 
   # copy auth files into generated output
-  cp -r "$auth_dir/" "$output_dir/$auth_dir/"
+  cp -r "$src_dir/" "$output_dir/"
 
   # update package.json
   tmp_packagejson="$tmp_dir/package.json"
@@ -120,13 +119,13 @@ function build() {
 
 output_dir="output"
 template_dir="template"
-auth_dir="authentication"
+src_dir="src"
 tmp_dir="/tmp/com.cybersource.node-sdk"
 
 swagger_codegen_version="3.0.43"
 swagger_codegen_bin_path="bin/swagger-codegen-cli-$swagger_codegen_version.jar"
 
-cybersource_rest_client_node_version="0.0.48"
+cybersource_rest_client_node_version="0.0.51"
 cybersource_rest_client_node_path="tmp/cybersource-rest-client-node-$cybersource_rest_client_node_version"
 cybersource_openapi_spec_path="tmp/cybersource-openapi3.json"
 
