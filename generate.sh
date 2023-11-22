@@ -4,15 +4,25 @@ rm -rf output/
 
 set -e
 
-function fetch_swagger_codegen_bin() {
-  latest_swagger_codegen_version="$(
-    curl --silent "https://api.github.com/repos/swagger-api/swagger-codegen/releases/latest" \
-    | jq --raw-output '.tag_name'
+function check_latest_release() {
+  strip_v='s/^v//i'
+
+  repo="$1"
+  version="$(echo "$2" | sed "$strip_v")"
+
+  latest_version="$(
+    curl --silent "https://api.github.com/repos/$repo/releases" \
+    | jq --raw-output '. | sort_by(.tag_name) | reverse | .[0].tag_name' \
+    | sed "$strip_v"
   )"
 
-  if [ "v$swagger_codegen_version" != "$latest_swagger_codegen_version" ]; then
-    >&2 echo -e "\033[1;33mThere is an update available for Swagger Codegen: $latest_swagger_codegen_version\033[0m"
+  if [ "$version" != "$latest_version" ]; then
+    >&2 echo -e "\033[1;33mThere is an update available for $repo: $version → $latest_version\033[0m"
   fi
+}
+
+function fetch_swagger_codegen_bin() {
+  check_latest_release "swagger-api/swagger-codegen" "$swagger_codegen_version"
 
   if [ ! -f "$swagger_codegen_bin_path" ]; then
     mkdir -p "$(dirname "$swagger_codegen_bin_path")"
@@ -23,20 +33,37 @@ function fetch_swagger_codegen_bin() {
   fi
 }
 
-function fetch_official_cybersource_sdk() {
-  latest_release="$(
-    curl --silent "https://api.github.com/repos/CyberSource/cybersource-rest-client-node/releases?per_page=1" \
-    | jq --raw-output '.[0].tag_name'
-  )"
+# submodule the original swagger template and then patch our changes onto it
+function update_swagger_template() {
+  check_latest_release "swagger-api/swagger-codegen-generators" "$swagger_codegen_templates_version"
 
-  if [ "$cybersource_rest_client_node_version" != "$latest_release" ]; then
-    >&2 echo -e "\033[1;33mThere is an update available for cybersource-rest-client-node: $latest_release\033[0m"
-  fi
+  pushd "$swagger_templates_dir/"
+  # clear any changes to submodule
+  git restore .
+  popd
+
+  # update submodule
+  git submodule update --init "$swagger_templates_dir"
+  # git submodule set-branch --branch "v1.0.44" "$swagger_templates_dir"
+  git -C "$swagger_templates_dir" checkout "$swagger_codegen_templates_version"
+
+  # apply patch
+  pushd "$swagger_templates_dir/"
+  git apply --ignore-space-change --ignore-whitespace "$swagger_template_patch"
+
+  # TODO: verify patch applied correctly
+
+  popd
+}
+
+function fetch_official_cybersource_sdk() {
+  repo="CyberSource/cybersource-rest-client-node"
+  check_latest_release "$repo" "$cybersource_rest_client_node_version"
 
   # download the repo
   if [ ! -f "$cybersource_rest_client_node_path.tar" ]; then
     tarball_url="$(
-      curl --silent "https://api.github.com/repos/CyberSource/cybersource-rest-client-node/releases/tags/$cybersource_rest_client_node_version" \
+      curl --silent "https://api.github.com/repos/$repo/releases/tags/$cybersource_rest_client_node_version" \
       | jq --raw-output '.tarball_url'
     )"
     mkdir -p "$(dirname "$cybersource_rest_client_node_path")"
@@ -88,8 +115,8 @@ function generate() {
     generate \
     -i "$cybersource_openapi_spec_path" \
     --lang typescript-axios \
-    --template-dir "$template_dir/" \
-    --config config.json \
+    --template-dir "$swagger_template_ts_axios_dir/" \
+    --config "$root_dir/config.json" \
     --output "$output_dir/"
 
   # ensure we generated correctly (swagger-codegen always exits with 0)
@@ -103,7 +130,7 @@ function generate() {
   # update package.json
   tmp_packagejson="$tmp_dir/package.json"
   mkdir -p "$(dirname "$tmp_packagejson")"
-  jq -s '.[0] * .[1]' "$output_dir/package.json" "./package.json" > "$tmp_packagejson"
+  jq -s '.[0] * .[1]' "$output_dir/package.json" "$root_dir/package.json" > "$tmp_packagejson"
   mv "$tmp_packagejson" "$output_dir/package.json"
 }
 
@@ -114,23 +141,30 @@ function build() {
   npm run build
 }
 
-# TODO: submodule the OG template and then patch our changes onto it
 # TODO: submodule the OG auth files and then patch our changes onto it
 
-output_dir="output"
-template_dir="template"
-src_dir="src"
+root_dir="$(realpath .)"
+output_dir="$root_dir/output"
+template_dir="$root_dir/template"
+src_dir="$root_dir/src"
 tmp_dir="/tmp/com.cybersource.node-sdk"
+git_modules_dir="$root_dir/modules"
 
 swagger_codegen_version="3.0.43"
-swagger_codegen_bin_path="bin/swagger-codegen-cli-$swagger_codegen_version.jar"
+swagger_codegen_bin_path="$root_dir/bin/swagger-codegen-cli-$swagger_codegen_version.jar"
+swagger_codegen_templates_version="v1.0.44"
 
 cybersource_rest_client_node_version="0.0.51"
-cybersource_rest_client_node_path="tmp/cybersource-rest-client-node-$cybersource_rest_client_node_version"
-cybersource_openapi_spec_path="tmp/cybersource-openapi3.json"
+cybersource_rest_client_node_path="$root_dir/tmp/cybersource-rest-client-node-$cybersource_rest_client_node_version"
+cybersource_openapi_spec_path="$root_dir/tmp/cybersource-openapi3.json"
+
+swagger_templates_dir="$git_modules_dir/templates"
+swagger_template_ts_axios_dir="$swagger_templates_dir/src/main/resources/handlebars/typescript-axios"
+swagger_template_patch="$template_dir/template.patch"
 
 fetch_swagger_codegen_bin
 fetch_official_cybersource_sdk
 update_openapi_spec
+update_swagger_template
 generate
 build
