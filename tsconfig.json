@@ -1,0 +1,10 @@
+{
+  "extends": [
+    "@dudeofawesome/typescript-configs/roles/node.json",
+    "@dudeofawesome/typescript-configs/layers/lenient.json"
+  ],
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": ["authentication/"]
+}
