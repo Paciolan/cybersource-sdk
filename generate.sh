@@ -12,7 +12,7 @@ function check_latest_release() {
 
   latest_version="$(
     curl --silent "https://api.github.com/repos/$repo/releases" \
-    | jq --raw-output '. | sort_by(.tag_name) | reverse | .[0].tag_name' \
+    | jq --raw-output '. | sort_by(.tag_name) | .[-1].tag_name' \
     | sed "$strip_v"
   )"
 
