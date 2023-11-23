@@ -4,6 +4,14 @@ rm -rf output/
 
 set -e
 
+# silence pushd & popd
+pushd () {
+  command pushd "$@" > /dev/null
+}
+popd () {
+  command popd "$@" > /dev/null
+}
+
 function check_latest_release() {
   strip_v='s/^v//i'
 
