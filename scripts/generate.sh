@@ -8,14 +8,6 @@ source "$(dirname "$0")/lib/variables.sh"
 source "$(dirname "$0")/lib/check-latest-release.sh"
 source "$(dirname "$0")/lib/submodule.sh"
 
-# silence pushd & popd
-pushd () {
-  command pushd "$@" > /dev/null
-}
-popd () {
-  command popd "$@" > /dev/null
-}
-
 function fetch_swagger_codegen_bin() {
   check_latest_release "swagger-api/swagger-codegen" "$swagger_codegen_version"
 
