@@ -17,6 +17,7 @@ function main() {
   rm "$swagger_template_ts_axios_dir/"*.patch
 
   # create patch
+  git -C "$swagger_templates_dir" add .
   git -C "$swagger_templates_dir" diff HEAD > "$swagger_template_patch"
 }
 
