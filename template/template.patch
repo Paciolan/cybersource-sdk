@@ -72,7 +72,7 @@ index 861245e1..225aa450 100644
      }
      {{^@last}}
 diff --git a/src/main/resources/handlebars/typescript-axios/configuration.mustache b/src/main/resources/handlebars/typescript-axios/configuration.mustache
-index ae7e0dcc..80f62bc5 100644
+index ae7e0dcc..e095223b 100644
 --- a/src/main/resources/handlebars/typescript-axios/configuration.mustache
 +++ b/src/main/resources/handlebars/typescript-axios/configuration.mustache
 @@ -2,6 +2,9 @@
@@ -80,7 +80,7 @@ index ae7e0dcc..80f62bc5 100644
  {{>licenseInfo}}
  
 +import { Logger } from 'winston';
-+import { LogConfiguration } from './authentication';
++import LogConfiguration from './authentication/logging/LogConfiguration';
 +
  export interface ConfigurationParameters {
      apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
@@ -253,10 +253,10 @@ index ae7e0dcc..80f62bc5 100644
      }
  }
 diff --git a/src/main/resources/handlebars/typescript-axios/index.mustache b/src/main/resources/handlebars/typescript-axios/index.mustache
-index 8d984020..a8dd9018 100644
+index 8d984020..72937495 100644
 --- a/src/main/resources/handlebars/typescript-axios/index.mustache
 +++ b/src/main/resources/handlebars/typescript-axios/index.mustache
-@@ -2,7 +2,9 @@
+@@ -2,6 +2,7 @@
  /* eslint-disable */
  {{>licenseInfo}}
  
@@ -264,8 +264,6 @@ index 8d984020..a8dd9018 100644
  export * from "./api";
  export * from "./configuration";
  export * from "./models";
-+export * from './authentication'
- {{#withSeparateModelsAndApi}}export * from "./{{tsModelPackage}}";{{/withSeparateModelsAndApi}}
 diff --git a/src/main/resources/handlebars/typescript-axios/npmignore b/src/main/resources/handlebars/typescript-axios/npmignore
 index 999d88df..3d451772 100644
 --- a/src/main/resources/handlebars/typescript-axios/npmignore
@@ -280,14 +278,15 @@ index 999d88df..3d451772 100644
 +/git_push.sh
 +.gitignore
 diff --git a/src/main/resources/handlebars/typescript-axios/tsconfig.mustache b/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
-index c4a4cc77..1a55d5f5 100644
+index c4a4cc77..9a2ea934 100644
 --- a/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
 +++ b/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
-@@ -3,7 +3,11 @@
+@@ -3,7 +3,12 @@
      "declaration": true,
      "target": "{{#supportsES6}}es6{{/supportsES6}}{{^supportsES6}}es5{{/supportsES6}}",
      "module": "commonjs",
 -    "noImplicitAny": true,
++    "esModuleInterop": true,
 +    // TODO: don't do this
 +    "noImplicitAny": false,
 +    "allowJs": true,

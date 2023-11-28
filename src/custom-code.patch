@@ -184,11 +184,11 @@ index 00000000..fcbd8581
 +}
 diff --git a/src/authentication/core/MerchantConfig.d.ts b/src/authentication/core/MerchantConfig.d.ts
 new file mode 100644
-index 00000000..b354739c
+index 00000000..106ec08b
 --- /dev/null
 +++ b/src/authentication/core/MerchantConfig.d.ts
-@@ -0,0 +1,268 @@
-+import LogConfiguration from '../logging/LogConfiguration';
+@@ -0,0 +1,270 @@
++import * as LogConfiguration from '../logging/LogConfiguration';
 +import { Logger } from 'winston';
 +
 +export interface Stringable {
@@ -233,7 +233,7 @@ index 00000000..b354739c
 +  }
 +>;
 +
-+export default class MerchantConfig {
++export = class MerchantConfig {
 +  /*Common Parameters*/
 +  authenticationType?: string;
 +  url;
@@ -457,7 +457,7 @@ index 00000000..b354739c
 +    | 'keyPass'
 +    | 'requestJsonData'
 +  >;
-+}
++};
 diff --git a/src/authentication/http/HTTPSigToken.js b/src/authentication/http/HTTPSigToken.js
 index 1ec1ad65..b38fa2a0 100644
 --- a/src/authentication/http/HTTPSigToken.js
@@ -474,7 +474,7 @@ index 1ec1ad65..b38fa2a0 100644
   * signature -- Signature header has paramter called signature
                  Paramter 'Signature' must contain all the paramters mentioned in header above in given order  */
 @@ -28,16 +28,16 @@ exports.getToken = function (merchantConfig, logger) {
-
+ 
          /* Headers - list is choosen based on HTTP method. Digest is not required for GET Method */
          if (requestType === Constants.GET || requestType === Constants.DELETE) {
 -            var headersForGetMethod = "host date request-target" + " " + Constants.V_C_MERCHANTID;
@@ -508,30 +508,22 @@ index fb037016..89a2d9e7 100644
                      digestString = BASE64( HMAC-SHA256 ( Payload ));
 @@ -20,7 +20,7 @@ exports.getSignatureParameter = function (merchantConfig, logger) {
      var signatureString = Constants.HOST + ': ' + merchantConfig.getRequestHost();
-
+ 
      signatureString += '\n' + Constants.DATE + ': ' + new Date(Date.now()).toUTCString();
 -    signatureString += '\nrequest-target: ';
 +    signatureString += '\n(request-target): ';
-
+ 
      var requestType = merchantConfig.getRequestType().toLowerCase();
-
-diff --git a/src/authentication/index.ts b/src/authentication/index.ts
-new file mode 100644
-index 00000000..3bd54b7c
---- /dev/null
-+++ b/src/authentication/index.ts
-@@ -0,0 +1,2 @@
-+export * from './logging/ExternalLoggerWrapper';
-+export * from './logging/LogConfiguration';
+ 
 diff --git a/src/authentication/logging/ExternalLoggerWrapper.d.ts b/src/authentication/logging/ExternalLoggerWrapper.d.ts
 new file mode 100644
-index 00000000..0783f786
+index 00000000..2d17b9f8
 --- /dev/null
 +++ b/src/authentication/logging/ExternalLoggerWrapper.d.ts
 @@ -0,0 +1,14 @@
 +import type { Logger } from 'winston';
 +
-+export default class ExternalLoggerWrapper {
++export = class ExternalLoggerWrapper {
 +  private extLogger: Pick<
 +    Logger,
 +    'error' | 'warn' | 'info' | 'debug' | 'verbose' | 'silly'
@@ -542,10 +534,10 @@ index 00000000..0783f786
 +  getLogger(): ExternalLoggerWrapper['extLogger'];
 +
 +  isLoggerEmpty(): boolean;
-+}
++};
 diff --git a/src/authentication/logging/LogConfiguration.d.ts b/src/authentication/logging/LogConfiguration.d.ts
 new file mode 100644
-index 00000000..04faf50d
+index 00000000..0440c860
 --- /dev/null
 +++ b/src/authentication/logging/LogConfiguration.d.ts
 @@ -0,0 +1,71 @@
@@ -563,7 +555,7 @@ index 00000000..04faf50d
 +  externalLogger?: ExternalLoggerWrapper;
 +}
 +
-+export default class LogConfiguration {
++export = class LogConfiguration {
 +  enableLog: boolean;
 +  logDirectory: string;
 +  logFileName: string;
@@ -619,19 +611,7 @@ index 00000000..04faf50d
 +  setMaxLogFiles(maxLogFilesValue: LogConfiguration['maxLogFiles']): void;
 +
 +  getDefaultLoggingProperties(warningMessage: string): void;
-+}
-diff --git a/src/authentication/logging/LogConfiguration.js b/src/authentication/logging/LogConfiguration.js
-index a79968ca..afb66141 100644
---- a/src/authentication/logging/LogConfiguration.js
-+++ b/src/authentication/logging/LogConfiguration.js
-@@ -4,6 +4,7 @@ var Constants = require('../util/Constants');
- const ExternalLoggerWrapper = require('../logging/ExternalLoggerWrapper');
- const ApiException = require('../util/ApiException');
-
-+/** @type {import('./LogConfiguration.d.ts').LogConfiguration} */
- class LogConfiguration {
-     enableLog;
-     logDirectory;
++};
 diff --git a/src/authentication/logging/Logger.d.ts b/src/authentication/logging/Logger.d.ts
 new file mode 100644
 index 00000000..aedef29b
@@ -646,18 +626,30 @@ index 00000000..aedef29b
 +  merchantConfig: MerchantConfig,
 +  loggerCategory: LiteralUnion<string, 'UnknownCategoryLogger'>,
 +): Logger;
+diff --git a/src/authentication/util/PropertiesUtil.js b/src/authentication/util/PropertiesUtil.js
+index 86d6ae93..622c8cee 100644
+--- a/src/authentication/util/PropertiesUtil.js
++++ b/src/authentication/util/PropertiesUtil.js
+@@ -2,7 +2,6 @@
+ 
+ var fs = require('fs');
+ var Constants = require('./Constants');
+-var Promise = require('promise');
+ var path = require('path');
+ 
+ /*Method for reading json config file */
 diff --git a/src/authentication/util/Utility.js b/src/authentication/util/Utility.js
 index 7f7b0f43..f1d7512d 100644
 --- a/src/authentication/util/Utility.js
 +++ b/src/authentication/util/Utility.js
 @@ -2,6 +2,10 @@
-
+ 
  var Constants = require('./Constants')
-
+ 
 +/**
 + * @param {string | { toString: () => any; }} responseCode
 + * @returns {string}
 + */
  exports.getResponseCodeMessage = function (responseCode) {
-
+ 
      var tempResponseCode = responseCode.toString();

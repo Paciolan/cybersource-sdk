@@ -1,9 +1,6 @@
 import type { Logger as WinstonLogger } from 'winston';
-import {
-  MerchantConfig,
-  MerchantConfigOptions,
-  Stringable,
-} from './MerchantConfig';
+import MerchantConfig from './MerchantConfig';
+import type { MerchantConfigOptions, Stringable } from './MerchantConfig';
 import * as Constants from '../util/Constants';
 import * as Logger from '../logging/Logger';
 import * as Authorization from './Authorization';

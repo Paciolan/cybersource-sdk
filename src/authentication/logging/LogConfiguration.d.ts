@@ -1,4 +1,4 @@
-import { ExternalLoggerWrapper } from './ExternalLoggerWrapper';
+import ExternalLoggerWrapper from './ExternalLoggerWrapper';
 
 export interface LogConfigurationOptions {
   enableLog?: boolean;
@@ -11,7 +11,8 @@ export interface LogConfigurationOptions {
   hasExternalLogger?: boolean;
   externalLogger?: ExternalLoggerWrapper;
 }
-export class LogConfiguration {
+
+export = class LogConfiguration {
   enableLog: boolean;
   logDirectory: string;
   logFileName: string;
@@ -67,4 +68,4 @@ export class LogConfiguration {
   setMaxLogFiles(maxLogFilesValue: LogConfiguration['maxLogFiles']): void;
 
   getDefaultLoggingProperties(warningMessage: string): void;
-}
+};

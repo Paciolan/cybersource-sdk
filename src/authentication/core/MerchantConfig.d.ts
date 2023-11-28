@@ -1,4 +1,4 @@
-import { LogConfiguration } from '../logging/LogConfiguration';
+import * as LogConfiguration from '../logging/LogConfiguration';
 import { Logger } from 'winston';
 
 export interface Stringable {
@@ -43,7 +43,7 @@ export type MerchantConfigOptions = Partial<
   }
 >;
 
-export class MerchantConfig {
+export = class MerchantConfig {
   /*Common Parameters*/
   authenticationType?: string;
   url;
@@ -267,4 +267,4 @@ export class MerchantConfig {
     | 'keyPass'
     | 'requestJsonData'
   >;
-}
+};
