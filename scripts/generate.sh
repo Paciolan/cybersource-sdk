@@ -4,29 +4,16 @@ rm -rf output/
 
 set -e
 
+source "$(dirname "$0")/lib/variables.sh"
+source "$(dirname "$0")/lib/check-latest-release.sh"
+source "$(dirname "$0")/lib/submodule.sh"
+
 # silence pushd & popd
 pushd () {
   command pushd "$@" > /dev/null
 }
 popd () {
   command popd "$@" > /dev/null
-}
-
-function check_latest_release() {
-  strip_v='s/^v//i'
-
-  repo="$1"
-  version="$(echo "$2" | sed "$strip_v")"
-
-  latest_version="$(
-    curl --silent "https://api.github.com/repos/$repo/releases" \
-    | jq --raw-output '. | sort_by(.tag_name) | .[-1].tag_name' \
-    | sed "$strip_v"
-  )"
-
-  if [ "$version" != "$latest_version" ]; then
-    >&2 echo -e "\033[1;33mThere is an update available for $repo: $version → $latest_version\033[0m"
-  fi
 }
 
 function fetch_swagger_codegen_bin() {
@@ -42,30 +29,10 @@ function fetch_swagger_codegen_bin() {
 }
 
 # submodule the original swagger template and then patch our changes onto it
-function update_submodule() {
-  version_tag="$1"
-  submodule_dir="$2"
-  patch_path="$3"
-
-  # clear any changes to submodule
-  git -C "$submodule_dir" add .
-  git -C "$submodule_dir" reset --hard
-
-  # update submodule
-  git submodule update --init "$submodule_dir"
-  git -C "$submodule_dir" checkout "$version_tag"
-
-  # apply patch
-  git -C "$submodule_dir" apply --ignore-space-change --ignore-whitespace "$patch_path"
-
-  # TODO: verify patch applied correctly
-}
-
-# submodule the original swagger template and then patch our changes onto it
 function update_swagger_template() {
   check_latest_release "swagger-api/swagger-codegen-generators" "$swagger_codegen_templates_version"
 
-  update_submodule \
+  update_submodule_and_apply_patch \
     "$swagger_codegen_templates_version" \
     "$swagger_templates_dir" \
     "$swagger_template_patch" \
@@ -76,7 +43,7 @@ function update_swagger_template() {
 function update_cybersource_upstream() {
   check_latest_release "CyberSource/cybersource-rest-client-node" "$cybersource_rest_client_version"
 
-  update_submodule \
+  update_submodule_and_apply_patch \
     "$cybersource_rest_client_version" \
     "$cybersource_rest_client_dir" \
     "$cybersource_rest_client_patch" \
@@ -141,31 +108,6 @@ function build() {
   npm install
   npm run build
 }
-
-# TODO: submodule the OG auth files and then patch our changes onto it
-
-root_dir="$(realpath .)"
-output_dir="$root_dir/output"
-template_dir="$root_dir/template"
-src_dir="$root_dir/src"
-tmp_dir="/tmp/com.cybersource.node-sdk"
-git_modules_dir="$root_dir/modules"
-
-swagger_codegen_version="3.0.43"
-swagger_codegen_bin_path="$root_dir/bin/swagger-codegen-cli-$swagger_codegen_version.jar"
-
-cybersource_rest_client_node_version="0.0.51"
-cybersource_rest_client_node_path="$root_dir/tmp/cybersource-rest-client-node-$cybersource_rest_client_node_version"
-cybersource_openapi_spec_path="$root_dir/tmp/cybersource-openapi3.json"
-
-cybersource_rest_client_version="0.0.51"
-cybersource_rest_client_dir="$git_modules_dir/cybersource-rest-client-node"
-cybersource_rest_client_patch="$src_dir/custom-code.patch"
-
-swagger_codegen_templates_version="v1.0.44"
-swagger_templates_dir="$git_modules_dir/templates"
-swagger_template_ts_axios_dir="$swagger_templates_dir/src/main/resources/handlebars/typescript-axios"
-swagger_template_patch="$template_dir/template.patch"
 
 fetch_swagger_codegen_bin
 update_swagger_template
