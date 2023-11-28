@@ -1,17 +1,21 @@
 {
   "folders": [
-	{
-		"path": "."
-	},
-	{
-		"path": "modules/cybersource-rest-client-node"
-	},
-	{
-		"path": "modules/templates"
-	},
-	{
-		"path": "output"
-	}
-],
+    {
+      "name": "cybersource-sdk",
+      "path": "."
+    },
+    {
+      "name": "submodule-cybersource",
+      "path": "modules/cybersource-rest-client-node"
+    },
+    {
+      "name": "submodule-swagger-templates",
+      "path": "modules/templates"
+    },
+    {
+      "name": "output",
+      "path": "output"
+    }
+  ],
   "settings": {}
 }
