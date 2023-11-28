@@ -16,15 +16,15 @@ class LogConfiguration {
     externalLogger;
 
     constructor(logConfig) {
-        this.setLogEnable(logConfig.enableLog);
-        this.setLogDirectory(logConfig.logDirectory);
-        this.setLogFileName(logConfig.logFileName);
-        this.setLogFileMaxSize(logConfig.logFileMaxSize);
-        this.setLoggingLevel(logConfig.loggingLevel);
-        this.setMaxLogFiles(logConfig.maxLogFiles);
-        this.setMaskingEnabled(logConfig.enableMasking);
-        this.setHasExternalLogger(logConfig.hasExternalLogger);
-        this.setExternalLogger(logConfig.externalLogger);
+        this.setLogEnable(logConfig?.enableLog);
+        this.setLogDirectory(logConfig?.logDirectory);
+        this.setLogFileName(logConfig?.logFileName);
+        this.setLogFileMaxSize(logConfig?.logFileMaxSize);
+        this.setLoggingLevel(logConfig?.loggingLevel);
+        this.setMaxLogFiles(logConfig?.maxLogFiles);
+        this.setMaskingEnabled(logConfig?.enableMasking);
+        this.setHasExternalLogger(logConfig?.hasExternalLogger);
+        this.setExternalLogger(logConfig?.externalLogger);
     }
 
     isLogEnabled() {

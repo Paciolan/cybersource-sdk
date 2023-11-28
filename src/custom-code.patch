@@ -612,6 +612,35 @@ index 00000000..0440c860
 +
 +  getDefaultLoggingProperties(warningMessage: string): void;
 +};
+diff --git a/src/authentication/logging/LogConfiguration.js b/src/authentication/logging/LogConfiguration.js
+index a79968ca..77051d63 100644
+--- a/src/authentication/logging/LogConfiguration.js
++++ b/src/authentication/logging/LogConfiguration.js
+@@ -16,15 +16,15 @@ class LogConfiguration {
+     externalLogger;
+ 
+     constructor(logConfig) {
+-        this.setLogEnable(logConfig.enableLog);
+-        this.setLogDirectory(logConfig.logDirectory);
+-        this.setLogFileName(logConfig.logFileName);
+-        this.setLogFileMaxSize(logConfig.logFileMaxSize);
+-        this.setLoggingLevel(logConfig.loggingLevel);
+-        this.setMaxLogFiles(logConfig.maxLogFiles);
+-        this.setMaskingEnabled(logConfig.enableMasking);
+-        this.setHasExternalLogger(logConfig.hasExternalLogger);
+-        this.setExternalLogger(logConfig.externalLogger);
++        this.setLogEnable(logConfig?.enableLog);
++        this.setLogDirectory(logConfig?.logDirectory);
++        this.setLogFileName(logConfig?.logFileName);
++        this.setLogFileMaxSize(logConfig?.logFileMaxSize);
++        this.setLoggingLevel(logConfig?.loggingLevel);
++        this.setMaxLogFiles(logConfig?.maxLogFiles);
++        this.setMaskingEnabled(logConfig?.enableMasking);
++        this.setHasExternalLogger(logConfig?.hasExternalLogger);
++        this.setExternalLogger(logConfig?.externalLogger);
+     }
+ 
+     isLogEnabled() {
 diff --git a/src/authentication/logging/Logger.d.ts b/src/authentication/logging/Logger.d.ts
 new file mode 100644
 index 00000000..aedef29b
