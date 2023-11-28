@@ -18,6 +18,7 @@
   "devDependencies": {
     "@dudeofawesome/typescript-configs": "^2.0.0-8",
     "@types/node": "^20.9.2",
+    "type-fest": "^4.8.2",
     "typescript": "^5.2.0, <5.3"
   }
 }
