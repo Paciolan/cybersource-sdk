@@ -3,7 +3,7 @@
 var Constants = require('../util/Constants');
 var Logger = require('../logging/Logger');
 var ApiException = require('../util/ApiException');
-var { LogConfiguration } = require('../logging/LogConfiguration');
+var LogConfiguration = require('../logging/LogConfiguration');
 
 /**
  * This function has all the merchentConfig properties getters and setters methods
@@ -61,6 +61,8 @@ function MerchantConfig(result) {
 
     /* Intermediate Host */
     this.intermediateHost = result.intermediateHost;
+
+    this.pemFileDirectory = result.pemFileDirectory;
 
     this.solutionId = result.solutionId;
 
@@ -346,6 +348,16 @@ MerchantConfig.prototype.getDefaultHeaders = function getDefaultHeaders() {
 MerchantConfig.prototype.setDefaultHeaders = function setDefaultHeaders(defaultHeaders) {
     return this.defaultHeaders;
 }
+
+MerchantConfig.prototype.getpemFileDirectory = function getpemFileDirectory() {
+    return this.pemFileDirectory;
+}
+
+MerchantConfig.prototype.setpemFileDirectory = function getpemFileDirectory(pemFileDirectory) {
+    this.pemFileDirectory = pemFileDirectory;
+}
+
+
 
 MerchantConfig.prototype.runEnvironmentCheck = function runEnvironmentCheck(logger) {
 

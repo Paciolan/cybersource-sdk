@@ -4,7 +4,6 @@ var Constants = require('../util/Constants');
 const ExternalLoggerWrapper = require('../logging/ExternalLoggerWrapper');
 const ApiException = require('../util/ApiException');
 
-/** @type {import('./LogConfiguration.d.ts').LogConfiguration} */
 class LogConfiguration {
     enableLog;
     logDirectory;
