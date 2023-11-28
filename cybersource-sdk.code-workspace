@@ -1,0 +1,17 @@
+{
+  "folders": [
+	{
+		"path": "."
+	},
+	{
+		"path": "modules/cybersource-rest-client-node"
+	},
+	{
+		"path": "modules/templates"
+	},
+	{
+		"path": "output"
+	}
+],
+  "settings": {}
+}
