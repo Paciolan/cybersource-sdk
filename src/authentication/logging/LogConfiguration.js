@@ -1,19 +1,20 @@
 'use strict';
 
-import { ExternalLoggerWrapper } from './ExternalLoggerWrapper';
 var Constants = require('../util/Constants');
+const ExternalLoggerWrapper = require('../logging/ExternalLoggerWrapper');
 const ApiException = require('../util/ApiException');
 
-export class LogConfiguration {
-    enableLog: boolean;
-    logDirectory: string;
-    logFileName: string;
-    logFileMaxSize: string;
-    loggingLevel: string;
-    maxLogFiles: string;
-    enableMasking: boolean;
-    hasExternalLogger: boolean;
-    externalLogger: ExternalLoggerWrapper;
+/** @type {import('./LogConfiguration.d.ts').LogConfiguration} */
+class LogConfiguration {
+    enableLog;
+    logDirectory;
+    logFileName;
+    logFileMaxSize;
+    loggingLevel;
+    maxLogFiles;
+    enableMasking;
+    hasExternalLogger;
+    externalLogger;
 
     constructor(logConfig) {
         this.setLogEnable(logConfig.enableLog);
@@ -158,8 +159,8 @@ export class LogConfiguration {
             this.loggingLevel = Constants.DEFAULT_LOGGING_LEVEL;
         }
 
-        if (this.logFileName === null || this.logFileName === "" || this.logFileName === undefined) {
-            this.logFileName = Constants.DEFAULT_LOG_FILENAME;
+        if (this.logFilename === null || this.logFilename === "" || this.logFilename === undefined) {
+            this.logFilename = Constants.DEFAULT_LOG_FILENAME;
         }
 
         if (this.enableLog) {
@@ -187,3 +188,5 @@ export class LogConfiguration {
         }
     }
 }
+
+module.exports = LogConfiguration;

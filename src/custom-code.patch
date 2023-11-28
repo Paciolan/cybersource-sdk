@@ -1,0 +1,663 @@
+diff --git a/src/authentication/core/AuthenticationHeader.ts b/src/authentication/core/AuthenticationHeader.ts
+new file mode 100644
+index 00000000..fcbd8581
+--- /dev/null
++++ b/src/authentication/core/AuthenticationHeader.ts
+@@ -0,0 +1,178 @@
++import type { Logger as WinstonLogger } from 'winston';
++import MerchantConfig from './MerchantConfig';
++import type { MerchantConfigOptions, Stringable } from './MerchantConfig';
++import * as Constants from '../util/Constants';
++import * as Logger from '../logging/Logger';
++import * as Authorization from './Authorization';
++import * as PayloadDigest from '../payloadDigest/DigestGenerator';
++import * as querystring from 'querystring';
++
++// Code added by Infosys dev team
++
++export class AuthenticationHeader {
++  merchantConfig: MerchantConfig;
++  constants = Constants;
++  basePath: string;
++  logger: WinstonLogger;
++
++  /**
++   * This method will set the merchantConfig object global
++   * @param configObject merchantConfiguration properties.
++   */
++  setConfiguration(configObject: MerchantConfigOptions) {
++    this.merchantConfig = new MerchantConfig(configObject);
++    this.constants = Constants;
++    if (this.merchantConfig.getIntermediateHost()) {
++      if (
++        this.merchantConfig
++          .getIntermediateHost()
++          .startsWith(this.constants.HTTP_URL_PREFIX) ||
++        this.merchantConfig.getIntermediateHost().startsWith('http://')
++      ) {
++        this.basePath = this.merchantConfig.getIntermediateHost();
++      } else {
++        this.basePath =
++          this.constants.HTTP_URL_PREFIX +
++          this.merchantConfig.getIntermediateHost();
++      }
++    } else {
++      this.basePath =
++        this.constants.HTTP_URL_PREFIX + this.merchantConfig.getRequestHost();
++    }
++    this.logger = Logger.getLogger(this.merchantConfig, 'ApiClient');
++  }
++
++  /**
++   * This method is to generate headers for http and jwt authentication.
++   */
++  callAuthenticationHeader(
++    httpMethod: string,
++    requestTarget: string,
++    requestBody: string,
++    headerParams,
++  ) {
++    this.merchantConfig.setRequestTarget(requestTarget);
++    this.merchantConfig.setRequestType(httpMethod);
++    this.merchantConfig.setRequestJsonData(requestBody);
++
++    this.logger.info(
++      'Authentication Type : ' + this.merchantConfig.getAuthenticationType(),
++    );
++    this.logger.info(
++      this.constants.REQUEST_TYPE + ' : ' + httpMethod.toUpperCase(),
++    );
++
++    var token = Authorization.getToken(this.merchantConfig, this.logger);
++
++    if (
++      this.merchantConfig.getAuthenticationType()?.toLowerCase() ===
++      this.constants.JWT
++    ) {
++      token = 'Bearer ' + token;
++      headerParams['Authorization'] = token;
++      this.logger.info(this.constants.AUTHORIZATION + ' : ' + token);
++    } else if (
++      this.merchantConfig.getAuthenticationType()?.toLowerCase() ===
++      this.constants.HTTP
++    ) {
++      var date = new Date(Date.now()).toUTCString();
++
++      if (
++        httpMethod.toLowerCase() === this.constants.POST ||
++        httpMethod.toLowerCase() === this.constants.PATCH ||
++        httpMethod.toLowerCase() === this.constants.PUT
++      ) {
++        var digest = PayloadDigest.generateDigest(
++          this.merchantConfig,
++          this.logger,
++        );
++        digest = this.constants.SIGNATURE_ALGORITHAM + digest;
++        this.logger.info(this.constants.DIGEST + ' : ' + digest);
++        headerParams['digest'] = digest;
++      }
++
++      headerParams['v-c-merchant-id'] = this.merchantConfig.getMerchantID();
++      headerParams['date'] = date;
++      headerParams['host'] = this.merchantConfig.getRequestHost();
++      headerParams['signature'] = token;
++      headerParams['User-Agent'] = this.constants.USER_AGENT_VALUE;
++
++      this.logger.info(
++        'v-c-merchant-id : ' + this.merchantConfig.getMerchantID(),
++      );
++      this.logger.info('date : ' + date);
++      this.logger.info('host : ' + this.merchantConfig.getRequestHost());
++      this.logger.info('signature : ' + token);
++      this.logger.info('User-Agent : ' + headerParams['User-Agent']);
++      this.logger.info(this.constants.END_TRANSACTION);
++    } else if (
++      this.merchantConfig.getAuthenticationType()?.toLowerCase() ===
++      this.constants.OAUTH
++    ) {
++      token = 'Bearer ' + token;
++      headerParams['Authorization'] = token;
++      // this.logger.info(this.constants.AUTHORIZATION + ' : ' + token);
++    }
++
++    return headerParams;
++  }
++
++  /**
++   * Build request target required for the signature generation
++   */
++  buildRequestTarget(
++    path: string,
++    pathParams: Record<string, string | null>,
++    queryParams: Record<string, string | null>,
++  ) {
++    if (!path.match(/^\//)) {
++      path = '/' + path;
++    }
++
++    var _this = this;
++    var requestTarget = path.replace(
++      /\{([\w-]+)\}/g,
++      function (fullMatch, key) {
++        var value;
++        if (pathParams.hasOwnProperty(key)) {
++          value = _this.paramToString(pathParams[key]);
++        } else {
++          value = fullMatch;
++        }
++        return encodeURIComponent(value);
++      },
++    );
++
++    // added by infosys team, to generate requestTarget with queryParams
++    if (Object.keys(queryParams).length !== 0) {
++      var queryFlag = false;
++      var queryArray: Record<string, string | null> = {};
++      Object.keys(queryParams).forEach(function (prop) {
++        var val = queryParams[prop];
++
++        if (val !== undefined) {
++          queryArray[prop] = val;
++          queryFlag = true;
++        }
++      });
++      if (queryFlag)
++        requestTarget = requestTarget + '?' + querystring.stringify(queryArray);
++    }
++    return requestTarget;
++  }
++
++  /**
++   * Returns a string representation for an actual parameter.
++   * @param param The actual parameter.
++   * @returns The string representation of <code>param</code>.
++   */
++  paramToString(param: null | undefined | Date | Stringable): string {
++    if (param == undefined || param == null) {
++      return '';
++    }
++    if (param instanceof Date) {
++      return param.toJSON();
++    }
++    return param.toString();
++  }
++}
+diff --git a/src/authentication/core/MerchantConfig.d.ts b/src/authentication/core/MerchantConfig.d.ts
+new file mode 100644
+index 00000000..b354739c
+--- /dev/null
++++ b/src/authentication/core/MerchantConfig.d.ts
+@@ -0,0 +1,268 @@
++import LogConfiguration from '../logging/LogConfiguration';
++import { Logger } from 'winston';
++
++export interface Stringable {
++  toString(): string;
++}
++
++export type MerchantConfigOptions = Partial<
++  Pick<
++    MerchantConfig,
++    | 'authenticationType'
++    | 'requestJsonPath'
++    | 'merchantID'
++    | 'keysDirectory'
++    | 'keyAlias'
++    | 'keyPass'
++    | 'keyFilename'
++    | 'useProxy'
++    | 'proxyAddress'
++    | 'proxyPort'
++    | 'proxyUser'
++    | 'proxyPassword'
++    | 'merchantKeyId'
++    | 'merchantsecretKey'
++    | 'useMetaKey'
++    | 'portfolioID'
++    | 'enableClientCert'
++    | 'clientCertDir'
++    | 'sslClientCert'
++    | 'privateKey'
++    | 'clientId'
++    | 'clientSecret'
++    | 'accessToken'
++    | 'refreshToken'
++    | 'runEnvironment'
++    | 'intermediateHost'
++    | 'solutionId'
++    | 'logConfiguration'
++    | 'defaultHeaders'
++  > & {
++    /** @deprecated use `keyFilename` instead */
++    keyFileName: MerchantConfig['keyFilename'];
++  }
++>;
++
++export default class MerchantConfig {
++  /*Common Parameters*/
++  authenticationType?: string;
++  url;
++  requestHost;
++  requestJsonPath;
++  merchantID?: string | Stringable;
++  requestType;
++  requestTarget;
++  requestJsonData;
++
++  /* JWT Parameters*/
++  keysDirectory?: string;
++  keyAlias?: string | Stringable;
++  keyPass?: string | Stringable;
++  keyType?;
++  keyFilename?: string | Stringable;
++  useHttpClient: boolean;
++
++  /* proxy Parameters*/
++  useProxy: boolean;
++  proxyAddress?: string;
++  proxyPort?: string | number;
++  proxyUser?: string;
++  proxyPassword?: string;
++
++  /*HTTP Parameters*/
++  merchantKeyId?: string | Stringable;
++  merchantsecretKey?: string | Stringable;
++
++  /* MetaKey Parameters */
++  useMetaKey: boolean;
++  portfolioID?: string;
++
++  /* MutualAuth Parameters */
++  enableClientCert: boolean;
++  clientCertDir?: string;
++  sslClientCert?: string | Stringable;
++  privateKey?: string | Stringable;
++
++  /* OAuth Parameters */
++  clientId?: string | Stringable;
++  clientSecret?: string | Stringable;
++  accessToken?: string | Stringable;
++  refreshToken?: string | Stringable;
++
++  runEnvironment?: string | Stringable;
++
++  /* Intermediate Host */
++  intermediateHost;
++
++  solutionId;
++
++  logConfiguration: LogConfiguration;
++
++  /* Default Custom Headers */
++  defaultHeaders;
++
++  constructor(result: MerchantConfigOptions);
++
++  getAuthenticationType(): MerchantConfig['authenticationType'];
++
++  setAuthenticationType(authType: MerchantConfig['authenticationType']): void;
++
++  setMerchantID(merchantID: MerchantConfig['merchantID']): void;
++
++  setRequestHost(requestHost: MerchantConfig['requestHost']): void;
++
++  setKeyAlias(keyAlias: MerchantConfig['keyAlias']): void;
++
++  setKeyPass(keyPass: MerchantConfig['keyPass']): void;
++
++  setKeysDirectory(keysDirectory: MerchantConfig['keysDirectory']): void;
++
++  setMerchantKeyID(merchantKeyId: MerchantConfig['merchantKeyId']): void;
++
++  setMerchantsecretKey(
++    merchantsecretKey: MerchantConfig['merchantsecretKey'],
++  ): void;
++
++  setUseMetaKey(useMetaKey: MerchantConfig['useMetaKey']): void;
++
++  setPortfolioID(portfolioID: MerchantConfig['portfolioID']): void;
++
++  setEnableClientCert(
++    enableClientCert: MerchantConfig['enableClientCert'],
++  ): void;
++
++  setClientCertDir(clientCertDir: MerchantConfig['clientCertDir']): void;
++
++  setSSLClientCert(sslClientCert: MerchantConfig['sslClientCert']): void;
++
++  setPrivateKey(privateKey: MerchantConfig['privateKey']): void;
++
++  setClientId(clientId: MerchantConfig['clientId']): void;
++
++  setClientSecret(clientSecret: MerchantConfig['clientSecret']): void;
++
++  setAccessToken(accessToken: MerchantConfig['accessToken']): void;
++
++  setRefreshToken(refreshToken: MerchantConfig['refreshToken']): void;
++
++  setSolutionId(solutionId: MerchantConfig['solutionId']): void;
++
++  setURL(url: MerchantConfig['url']): void;
++
++  getMerchantID(): MerchantConfig['merchantID'];
++
++  getRequestHost(): MerchantConfig['requestHost'];
++
++  getKeyAlias(): MerchantConfig['keyAlias'];
++
++  getKeyPass(): MerchantConfig['keyPass'];
++
++  getUseMetaKey(): MerchantConfig['useMetaKey'];
++
++  getPortfolioID(): MerchantConfig['portfolioID'];
++
++  getEnableClientCert(): MerchantConfig['enableClientCert'];
++
++  getClientCertDir(): MerchantConfig['clientCertDir'];
++
++  getSSLClientCert(): MerchantConfig['sslClientCert'];
++
++  getPrivateKey(): MerchantConfig['privateKey'];
++
++  getClientId(): MerchantConfig['clientId'];
++
++  getClientSecret(): MerchantConfig['clientSecret'];
++
++  getAccessToken(): MerchantConfig['accessToken'];
++
++  getRefreshToken(): MerchantConfig['refreshToken'];
++
++  getKeysDirectory(): MerchantConfig['keysDirectory'];
++
++  getMerchantKeyID(): MerchantConfig['merchantKeyId'];
++
++  getMerchantsecretKey(): MerchantConfig['merchantsecretKey'];
++
++  getSolutionId(): MerchantConfig['solutionId'];
++
++  getURL(): MerchantConfig['url'];
++
++  getRequestTarget(): MerchantConfig['requestTarget'];
++
++  setRequestJsonData(requestJsonData: MerchantConfig['requestJsonData']): void;
++
++  getRequestJsonData(): MerchantConfig['requestJsonData'];
++
++  setRequestTarget(requestTarget: MerchantConfig['requestTarget']): void;
++
++  getRequestJsonPath(): MerchantConfig['requestJsonPath'];
++
++  setRequestJsonPath(requestJsonPath: MerchantConfig['requestJsonPath']): void;
++
++  getRequestType(): MerchantConfig['requestType'];
++
++  setRequestType(requestType: MerchantConfig['requestType']): void;
++
++  getRunEnvironment(): MerchantConfig['runEnvironment'];
++
++  setRunEnvironment(runEnvironment: MerchantConfig['runEnvironment']): void;
++
++  getIntermediateHost(): MerchantConfig['intermediateHost'];
++
++  setIntermediateHost(
++    intermediateHost: MerchantConfig['intermediateHost'],
++  ): void;
++
++  getProxyAddress(): MerchantConfig['proxyAddress'];
++
++  setProxyAddress(proxyAddress: MerchantConfig['proxyAddress']);
++
++  getProxyPort(): MerchantConfig['proxyPort'];
++
++  setProxyPort(proxyPort: MerchantConfig['proxyPort']);
++
++  getUseProxy(): MerchantConfig['useProxy'];
++
++  setUseProxy(useProxy): MerchantConfig['useProxy'];
++
++  getProxyUser(): MerchantConfig['proxyUser'];
++
++  setProxyUser(proxyUser: MerchantConfig['proxyUser']): void;
++
++  getProxyPassword(): MerchantConfig['proxyPassword'];
++
++  setProxyPassword(proxyPassword: MerchantConfig['proxyPassword']): void;
++
++  getKeyFileName(): MerchantConfig['keyFilename'];
++
++  setKeyFileName(keyFilename: MerchantConfig['keyFilename']): void;
++
++  getLogConfiguration(): MerchantConfig['logConfiguration'];
++
++  setLogConfiguration(logConfig: MerchantConfig['logConfiguration']): void;
++
++  getDefaultHeaders(): MerchantConfig['defaultHeaders'];
++
++  setDefaultHeaders(defaultHeaders: MerchantConfig['defaultHeaders']): void;
++
++  runEnvironmentCheck(logger: Logger): void;
++
++  //This method is for fallback
++  defaultPropValues(): void;
++
++  /**
++   * This method is to log all merchantConfig properties
++   * excluding HideMerchantConfigProperties defined in Constants
++   *
++   * @param {*} merchantConfig
++   */
++  getAllProperties(
++    merchantConfig,
++  ): Exclude<
++    MerchantConfig,
++    | 'merchantID'
++    | 'merchantsecretKey'
++    | 'merchantKeyId'
++    | 'keyAlias'
++    | 'keyPass'
++    | 'requestJsonData'
++  >;
++}
+diff --git a/src/authentication/http/HTTPSigToken.js b/src/authentication/http/HTTPSigToken.js
+index 1ec1ad65..b38fa2a0 100644
+--- a/src/authentication/http/HTTPSigToken.js
++++ b/src/authentication/http/HTTPSigToken.js
+@@ -8,8 +8,8 @@ var ApiException = require('../util/ApiException');
+  * keyid     -- Merchant ID obtained from EBC portal
+  * algorithm -- Should have value as "HmacSHA256"
+  * headers   -- List of all header name passed in the Signature paramter below
+-                String getHeaders = "host date request-target" + " " + "v-c-merchant-id";
+-                String postHeaders = "host date request-target digest v-c-merchant-id";
++                String getHeaders = "host date (request-target)" + " " + "v-c-merchant-id";
++                String postHeaders = "host date (request-target) digest v-c-merchant-id";
+                 Note: Digest is not passed for GET calls
+  * signature -- Signature header has paramter called signature
+                 Paramter 'Signature' must contain all the paramters mentioned in header above in given order  */
+@@ -28,16 +28,16 @@ exports.getToken = function (merchantConfig, logger) {
+
+         /* Headers - list is choosen based on HTTP method. Digest is not required for GET Method */
+         if (requestType === Constants.GET || requestType === Constants.DELETE) {
+-            var headersForGetMethod = "host date request-target" + " " + Constants.V_C_MERCHANTID;
++            var headersForGetMethod = "host date (request-target)" + " " + Constants.V_C_MERCHANTID;
+             signatureHeader += ", headers=\"" + headersForGetMethod + "\"";
+         }
+         else if (requestType === Constants.POST || requestType === Constants.PUT) {
+-            var headersForPostPutMethod = "host date request-target digest " + Constants.V_C_MERCHANTID;
++            var headersForPostPutMethod = "host date (request-target) digest " + Constants.V_C_MERCHANTID;
+             signatureHeader += ", headers=\"" + headersForPostPutMethod + "\"";
+         }
+         // for patch call, added on 26-10-18
+         else if (requestType === Constants.PATCH) {
+-            var headersForPatchMethod = "host date request-target digest " + Constants.V_C_MERCHANTID;
++            var headersForPatchMethod = "host date (request-target) digest " + Constants.V_C_MERCHANTID;
+             signatureHeader += ", headers=\"" + headersForPatchMethod + "\"";
+         }
+         else {
+diff --git a/src/authentication/http/SignatureParameterGenerator.js b/src/authentication/http/SignatureParameterGenerator.js
+index fb037016..89a2d9e7 100644
+--- a/src/authentication/http/SignatureParameterGenerator.js
++++ b/src/authentication/http/SignatureParameterGenerator.js
+@@ -7,7 +7,7 @@ var DigestGenerator = require('../payloadDigest/DigestGenerator');
+          * SECRET KEY -
+          * host: Sandbox (apitest.cybersource.com) or Production (api.cybersource.com) hostname
+          * date: 'HTTP-date' format as defined by RFC7231.
+-         * request-target: Should be in format of httpMethod: path
++         * (request-target): Should be in format of httpMethod: path
+                              Example: 'post /pts/v2/payments'
+          * Digest: Only needed for POST calls.
+                     digestString = BASE64( HMAC-SHA256 ( Payload ));
+@@ -20,7 +20,7 @@ exports.getSignatureParameter = function (merchantConfig, logger) {
+     var signatureString = Constants.HOST + ': ' + merchantConfig.getRequestHost();
+
+     signatureString += '\n' + Constants.DATE + ': ' + new Date(Date.now()).toUTCString();
+-    signatureString += '\nrequest-target: ';
++    signatureString += '\n(request-target): ';
+
+     var requestType = merchantConfig.getRequestType().toLowerCase();
+
+diff --git a/src/authentication/index.ts b/src/authentication/index.ts
+new file mode 100644
+index 00000000..3bd54b7c
+--- /dev/null
++++ b/src/authentication/index.ts
+@@ -0,0 +1,2 @@
++export * from './logging/ExternalLoggerWrapper';
++export * from './logging/LogConfiguration';
+diff --git a/src/authentication/logging/ExternalLoggerWrapper.d.ts b/src/authentication/logging/ExternalLoggerWrapper.d.ts
+new file mode 100644
+index 00000000..0783f786
+--- /dev/null
++++ b/src/authentication/logging/ExternalLoggerWrapper.d.ts
+@@ -0,0 +1,14 @@
++import type { Logger } from 'winston';
++
++export default class ExternalLoggerWrapper {
++  private extLogger: Pick<
++    Logger,
++    'error' | 'warn' | 'info' | 'debug' | 'verbose' | 'silly'
++  >;
++
++  constructor(extLogger: ExternalLoggerWrapper['extLogger']);
++
++  getLogger(): ExternalLoggerWrapper['extLogger'];
++
++  isLoggerEmpty(): boolean;
++}
+diff --git a/src/authentication/logging/LogConfiguration.d.ts b/src/authentication/logging/LogConfiguration.d.ts
+new file mode 100644
+index 00000000..04faf50d
+--- /dev/null
++++ b/src/authentication/logging/LogConfiguration.d.ts
+@@ -0,0 +1,71 @@
++import ExternalLoggerWrapper from './ExternalLoggerWrapper';
++
++export interface LogConfigurationOptions {
++  enableLog?: boolean;
++  logDirectory?: string;
++  logFileName?: string;
++  logFileMaxSize?: string;
++  loggingLevel?: string;
++  maxLogFiles?: string;
++  enableMasking?: boolean;
++  hasExternalLogger?: boolean;
++  externalLogger?: ExternalLoggerWrapper;
++}
++
++export default class LogConfiguration {
++  enableLog: boolean;
++  logDirectory: string;
++  logFileName: string;
++  logFileMaxSize: string;
++  loggingLevel: string;
++  maxLogFiles: string;
++  enableMasking: boolean;
++  hasExternalLogger: boolean;
++  externalLogger?: ExternalLoggerWrapper;
++
++  constructor(logConfig?: LogConfigurationOptions);
++
++  isLogEnabled(): LogConfiguration['enableLog'];
++
++  setLogEnable(enableLogValue: LogConfiguration['enableLog']): void;
++
++  isMaskingEnabled(): LogConfiguration['isMaskingEnabled'];
++
++  setMaskingEnabled(
++    enableMaskingValue: LogConfiguration['isMaskingEnabled'],
++  ): void;
++
++  setHasExternalLogger(
++    hasExternalLogger: LogConfiguration['hasExternalLogger'],
++  ): void;
++
++  isExternalLoggerSet(): LogConfiguration['hasExternalLogger'];
++
++  setExternalLogger(externalLogger: LogConfiguration['externalLogger']): void;
++
++  getExternalLogger(): LogConfiguration['externalLogger'];
++
++  getLogDirectory(): LogConfiguration['logDirectory'];
++
++  setLogDirectory(logDirectoryValue: LogConfiguration['logDirectory']): void;
++
++  getLogFileName(): LogConfiguration['logFileName'];
++
++  setLogFileName(logFileNameValue: LogConfiguration['logFileName']): void;
++
++  getLogFileMaxSize(): LogConfiguration['logFileMaxSize'];
++
++  setLogFileMaxSize(
++    logFileMaxSizeValue: LogConfiguration['logFileMaxSize'],
++  ): void;
++
++  getLoggingLevel(): LogConfiguration['loggingLevel'];
++
++  setLoggingLevel(loggingLevelValue: LogConfiguration['loggingLevel']): void;
++
++  getMaxLogFiles(): LogConfiguration['maxLogFiles'];
++
++  setMaxLogFiles(maxLogFilesValue: LogConfiguration['maxLogFiles']): void;
++
++  getDefaultLoggingProperties(warningMessage: string): void;
++}
+diff --git a/src/authentication/logging/LogConfiguration.js b/src/authentication/logging/LogConfiguration.js
+index a79968ca..afb66141 100644
+--- a/src/authentication/logging/LogConfiguration.js
++++ b/src/authentication/logging/LogConfiguration.js
+@@ -4,6 +4,7 @@ var Constants = require('../util/Constants');
+ const ExternalLoggerWrapper = require('../logging/ExternalLoggerWrapper');
+ const ApiException = require('../util/ApiException');
+
++/** @type {import('./LogConfiguration.d.ts').LogConfiguration} */
+ class LogConfiguration {
+     enableLog;
+     logDirectory;
+diff --git a/src/authentication/logging/Logger.d.ts b/src/authentication/logging/Logger.d.ts
+new file mode 100644
+index 00000000..aedef29b
+--- /dev/null
++++ b/src/authentication/logging/Logger.d.ts
+@@ -0,0 +1,8 @@
++import MerchantConfig from '../core/MerchantConfig';
++import { Logger } from 'winston';
++import { LiteralUnion } from 'type-fest';
++
++export function getLogger(
++  merchantConfig: MerchantConfig,
++  loggerCategory: LiteralUnion<string, 'UnknownCategoryLogger'>,
++): Logger;
+diff --git a/src/authentication/util/Utility.js b/src/authentication/util/Utility.js
+index 7f7b0f43..f1d7512d 100644
+--- a/src/authentication/util/Utility.js
++++ b/src/authentication/util/Utility.js
+@@ -2,6 +2,10 @@
+
+ var Constants = require('./Constants')
+
++/**
++ * @param {string | { toString: () => any; }} responseCode
++ * @returns {string}
++ */
+ exports.getResponseCodeMessage = function (responseCode) {
+
+     var tempResponseCode = responseCode.toString();
