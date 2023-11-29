@@ -1,0 +1,297 @@
+diff --git a/src/main/resources/handlebars/typescript-axios/apiInner.mustache b/src/main/resources/handlebars/typescript-axios/apiInner.mustache
+index 861245e1..225aa450 100644
+--- a/src/main/resources/handlebars/typescript-axios/apiInner.mustache
++++ b/src/main/resources/handlebars/typescript-axios/apiInner.mustache
+@@ -3,6 +3,7 @@
+ {{>licenseInfo}}
+ 
+ import globalAxios, { AxiosResponse, AxiosInstance, AxiosRequestConfig } from 'axios';
++import { AuthenticationHeader } from "{{apiRelativeToRoot}}authentication/core/AuthenticationHeader";
+ import { Configuration } from '{{apiRelativeToRoot}}configuration';
+ // Some imports not used depending on template conditions
+ // @ts-ignore
+@@ -31,7 +32,7 @@ export const {{classname}}AxiosParamCreator = function (configuration?: Configur
+          * @param {*} [options] Override http request option.
+          * @throws {RequiredError}
+          */
+-        {{nickname}}{{#isForm}}Form{{/isForm}}: async ({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
++        {{nickname}}{{#isForm}}Form{{/isForm}}: async ({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options: AxiosRequestConfig & Configuration = {}): Promise<RequestArgs> => {
+     {{#parameters}}
+     {{#required}}
+             // verify required parameter '{{paramName}}' is not null or undefined
+@@ -209,6 +210,15 @@ export const {{classname}}AxiosParamCreator = function (configuration?: Configur
+     {{/bodyParam}}
+     {{/isForm}}
+ 
++            const authHeader = new AuthenticationHeader();
++            authHeader.setConfiguration({...configuration, ...options});
++            localVarRequestOptions.headers = authHeader.callAuthenticationHeader(
++                localVarRequestOptions.method,
++                localVarPath,
++                localVarRequestOptions.data,
++                localVarRequestOptions.headers,
++            );
++
+             return {
+                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                 options: localVarRequestOptions,
+@@ -239,7 +249,7 @@ export const {{classname}}Fp = function(configuration?: Configuration) {
+          * @param {*} [options] Override http request option.
+          * @throws {RequiredError}
+          */
+-        async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>>> {
++        async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig & Configuration): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>>> {
+             const localVarAxiosArgs = await {{classname}}AxiosParamCreator(configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options);
+             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+@@ -271,7 +281,7 @@ export const {{classname}}Factory = function (configuration?: Configuration, bas
+          * @param {*} [options] Override http request option.
+          * @throws {RequiredError}
+          */
+-        async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig): Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>> {
++        async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig & Configuration): Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>> {
+             return {{classname}}Fp(configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options).then((request) => request(axios, basePath));
+         },
+     {{/contents}}
+@@ -301,7 +311,7 @@ export interface {{classname}}Interface {
+      * @throws {RequiredError}
+      * @memberof {{classname}}Interface
+      */
+-    async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig): Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>>;
++    async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig & Configuration): Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>>;
+ 
+ {{/contents}}
+ {{/operation}}
+@@ -335,7 +345,7 @@ export class {{classname}} extends BaseAPI {
+      * @throws {RequiredError}
+      * @memberof {{classname}}
+      */
+-    public async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig) : Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>> {
++    public async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig & Configuration) : Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>> {
+         return {{classname}}Fp(this.configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options).then((request) => request(this.axios, this.basePath));
+     }
+     {{^@last}}
+diff --git a/src/main/resources/handlebars/typescript-axios/configuration.mustache b/src/main/resources/handlebars/typescript-axios/configuration.mustache
+index ae7e0dcc..e095223b 100644
+--- a/src/main/resources/handlebars/typescript-axios/configuration.mustache
++++ b/src/main/resources/handlebars/typescript-axios/configuration.mustache
+@@ -2,6 +2,9 @@
+ /* eslint-disable */
+ {{>licenseInfo}}
+ 
++import { Logger } from 'winston';
++import LogConfiguration from './authentication/logging/LogConfiguration';
++
+ export interface ConfigurationParameters {
+     apiKey?: string | Promise<string> | ((name: string) => string) | ((name: string) => Promise<string>);
+     username?: string;
+@@ -9,7 +12,58 @@ export interface ConfigurationParameters {
+     accessToken?: string | Promise<string> | ((name?: string, scopes?: string[]) => string) | ((name?: string, scopes?: string[]) => Promise<string>);
+     basePath?: string;
+     baseOptions?: any;
+-}
++
++    /*Common Parameters*/
++    authenticationType?: string;
++    url?: string;
++    requestHost?: string;
++    requestJsonPath?: string;
++    merchantID?: string;
++    requestType?: string;
++    requestTarget?: string;
++    requestJsonData?: Record<string, unknown>;
++
++    /* JWT Parameters*/
++    keysDirectory?: string;
++    keyAlias?: string;
++    keyPass?: string;
++    keyType?: string;
++    keyFilename?: string;
++    useHttpClient?: boolean;
++
++    /*HTTP Parameters*/
++    /**
++     * your shared secret key ID
++     * @type {string}
++     * @memberof Configuration
++     */
++    merchantKeyId?: string;
++    /**
++     * your shared secret key
++     * @type {string}
++     * @memberof Configuration
++     */
++    merchantsecretKey?: string;
++
++    /* MetaKey Parameters */
++    useMetaKey?: boolean;
++    portfolioID?: string;
++
++    /* MutualAuth Parameters */
++    enableClientCert?: boolean;
++    clientCertDir?: string;
++    sslClientCert?: string;
++    privateKey?: string;
++
++    runEnvironment?: string;
++
++    /* Intermediate Host */
++    intermediateHost?: string;
++
++    solutionId?: string;
++
++    logConfiguration?: LogConfiguration;
++  }
+ 
+ export class Configuration {
+     /**
+@@ -54,6 +108,57 @@ export class Configuration {
+      */
+     baseOptions?: any;
+ 
++    /*Common Parameters*/
++    authenticationType?: string;
++    url?: string;
++    requestHost?: string;
++    requestJsonPath?: string;
++    merchantID?: string;
++    requestType?: string;
++    requestTarget?: string;
++    requestJsonData?: Record<string, unknown>;
++
++    /* JWT Parameters*/
++    keysDirectory?: string;
++    keyAlias?: string;
++    keyPass?: string;
++    keyType?: string;
++    keyFilename?: string;
++    useHttpClient?: boolean;
++
++    /*HTTP Parameters*/
++    /**
++     * your shared secret key ID
++     * @type {string}
++     * @memberof Configuration
++     */
++    merchantKeyId?: string;
++    /**
++     * your shared secret key
++     * @type {string}
++     * @memberof Configuration
++     */
++    merchantsecretKey?: string;
++
++    /* MetaKey Parameters */
++    useMetaKey?: boolean;
++    portfolioID?: string;
++
++    /* MutualAuth Parameters */
++    enableClientCert?: boolean;
++    clientCertDir?: string;
++    sslClientCert?: string;
++    privateKey?: string;
++
++    runEnvironment?: string;
++
++    /* Intermediate Host */
++    intermediateHost?: string;
++
++    solutionId?: string;
++
++    logConfiguration?: LogConfiguration;
++
+     constructor(param: ConfigurationParameters = {}) {
+         this.apiKey = param.apiKey;
+         this.username = param.username;
+@@ -61,5 +166,48 @@ export class Configuration {
+         this.accessToken = param.accessToken;
+         this.basePath = param.basePath;
+         this.baseOptions = param.baseOptions;
++        this.merchantKeyId = param.merchantKeyId;
++        this.merchantsecretKey = param.merchantsecretKey;
++
++        /*Common Parameters*/
++        this.authenticationType = param.authenticationType;
++        this.url;
++        this.requestHost;
++        this.requestJsonPath = param.requestJsonPath;
++        this.merchantID = param.merchantID;
++        this.requestType;
++        this.requestTarget;
++        this.requestJsonData;
++
++        /* JWT Parameters*/
++        this.keysDirectory = param.keysDirectory;
++        this.keyAlias = param.keyAlias;
++        this.keyPass = param.keyPass;
++        this.keyType;
++        this.keyFilename = param.keyFilename;
++        this.useHttpClient;
++
++        /*HTTP Parameters*/
++        this.merchantKeyId = param.merchantKeyId;
++        this.merchantsecretKey = param.merchantsecretKey;
++
++        /* MetaKey Parameters */
++        this.useMetaKey = param.useMetaKey;
++        this.portfolioID = param.portfolioID;
++
++        /* MutualAuth Parameters */
++        this.enableClientCert = param.enableClientCert;
++        this.clientCertDir = param.clientCertDir;
++        this.sslClientCert = param.sslClientCert;
++        this.privateKey = param.privateKey;
++
++        this.runEnvironment = param.runEnvironment;
++
++        /* Intermediate Host */
++        this.intermediateHost = param.intermediateHost;
++
++        this.solutionId = param.solutionId;
++
++        this.logConfiguration = param.logConfiguration;
+     }
+ }
+diff --git a/src/main/resources/handlebars/typescript-axios/index.mustache b/src/main/resources/handlebars/typescript-axios/index.mustache
+index 8d984020..72937495 100644
+--- a/src/main/resources/handlebars/typescript-axios/index.mustache
++++ b/src/main/resources/handlebars/typescript-axios/index.mustache
+@@ -2,6 +2,7 @@
+ /* eslint-disable */
+ {{>licenseInfo}}
+ 
++export { BASE_PATH } from "./base"
+ export * from "./api";
+ export * from "./configuration";
+ export * from "./models";
+diff --git a/src/main/resources/handlebars/typescript-axios/npmignore b/src/main/resources/handlebars/typescript-axios/npmignore
+index 999d88df..3d451772 100644
+--- a/src/main/resources/handlebars/typescript-axios/npmignore
++++ b/src/main/resources/handlebars/typescript-axios/npmignore
+@@ -1 +1,6 @@
+-# empty npmignore to ensure all required files (e.g., in the dist folder) are published by npm
+\ No newline at end of file
++/apis
++/authentication
++/models
++/*.ts
++/git_push.sh
++.gitignore
+diff --git a/src/main/resources/handlebars/typescript-axios/tsconfig.mustache b/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
+index c4a4cc77..9a2ea934 100644
+--- a/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
++++ b/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
+@@ -3,7 +3,12 @@
+     "declaration": true,
+     "target": "{{#supportsES6}}es6{{/supportsES6}}{{^supportsES6}}es5{{/supportsES6}}",
+     "module": "commonjs",
+-    "noImplicitAny": true,
++    "esModuleInterop": true,
++    // TODO: don't do this
++    "noImplicitAny": false,
++    "allowJs": true,
++    // TODO: don't do this
++    "skipLibCheck": true,
+     "outDir": "dist",
+     "rootDir": ".",
+     {{^supportsES6}}

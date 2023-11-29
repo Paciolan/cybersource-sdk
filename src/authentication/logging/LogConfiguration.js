@@ -1,30 +1,30 @@
 'use strict';
 
-import { ExternalLoggerWrapper } from './ExternalLoggerWrapper';
 var Constants = require('../util/Constants');
+const ExternalLoggerWrapper = require('../logging/ExternalLoggerWrapper');
 const ApiException = require('../util/ApiException');
 
-export class LogConfiguration {
-    enableLog: boolean;
-    logDirectory: string;
-    logFileName: string;
-    logFileMaxSize: string;
-    loggingLevel: string;
-    maxLogFiles: string;
-    enableMasking: boolean;
-    hasExternalLogger: boolean;
-    externalLogger: ExternalLoggerWrapper;
+class LogConfiguration {
+    enableLog;
+    logDirectory;
+    logFileName;
+    logFileMaxSize;
+    loggingLevel;
+    maxLogFiles;
+    enableMasking;
+    hasExternalLogger;
+    externalLogger;
 
     constructor(logConfig) {
-        this.setLogEnable(logConfig.enableLog);
-        this.setLogDirectory(logConfig.logDirectory);
-        this.setLogFileName(logConfig.logFileName);
-        this.setLogFileMaxSize(logConfig.logFileMaxSize);
-        this.setLoggingLevel(logConfig.loggingLevel);
-        this.setMaxLogFiles(logConfig.maxLogFiles);
-        this.setMaskingEnabled(logConfig.enableMasking);
-        this.setHasExternalLogger(logConfig.hasExternalLogger);
-        this.setExternalLogger(logConfig.externalLogger);
+        this.setLogEnable(logConfig?.enableLog);
+        this.setLogDirectory(logConfig?.logDirectory);
+        this.setLogFileName(logConfig?.logFileName);
+        this.setLogFileMaxSize(logConfig?.logFileMaxSize);
+        this.setLoggingLevel(logConfig?.loggingLevel);
+        this.setMaxLogFiles(logConfig?.maxLogFiles);
+        this.setMaskingEnabled(logConfig?.enableMasking);
+        this.setHasExternalLogger(logConfig?.hasExternalLogger);
+        this.setExternalLogger(logConfig?.externalLogger);
     }
 
     isLogEnabled() {
@@ -158,8 +158,8 @@ export class LogConfiguration {
             this.loggingLevel = Constants.DEFAULT_LOGGING_LEVEL;
         }
 
-        if (this.logFileName === null || this.logFileName === "" || this.logFileName === undefined) {
-            this.logFileName = Constants.DEFAULT_LOG_FILENAME;
+        if (this.logFilename === null || this.logFilename === "" || this.logFilename === undefined) {
+            this.logFilename = Constants.DEFAULT_LOG_FILENAME;
         }
 
         if (this.enableLog) {
@@ -187,3 +187,5 @@ export class LogConfiguration {
         }
     }
 }
+
+module.exports = LogConfiguration;

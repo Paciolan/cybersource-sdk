@@ -2,6 +2,10 @@
 
 var Constants = require('./Constants')
 
+/**
+ * @param {string | { toString: () => any; }} responseCode
+ * @returns {string}
+ */
 exports.getResponseCodeMessage = function (responseCode) {
 
     var tempResponseCode = responseCode.toString();

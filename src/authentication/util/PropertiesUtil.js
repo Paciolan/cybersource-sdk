@@ -2,7 +2,6 @@
 
 var fs = require('fs');
 var Constants = require('./Constants');
-var Promise = require('promise');
 var path = require('path');
 
 /*Method for reading json config file */
