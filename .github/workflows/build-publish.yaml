@@ -21,7 +21,7 @@ jobs:
           java-version: '17'
 
       - name: 'Build 🏗️'
-        run: './generate.sh'
+        run: './scripts/generate.sh'
 
       # - name: 'Setup 🛎️'
       #   uses: 'dudeofawesome/actions/node-setup@v1'
