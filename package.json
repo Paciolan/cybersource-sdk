@@ -1,7 +1,7 @@
 {
   "name": "@paciolan/cybersource-sdk",
   "description": "CyberSource REST API Typescript SDK",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "keywords": [
     "cybersource"
   ],
