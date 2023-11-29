@@ -2,12 +2,14 @@ function update_submodule() {
   version_tag="$1"
   submodule_dir="$2"
 
+  # init submodule
+  git submodule update --init "$submodule_dir" > /dev/null
+
   # clear any changes to submodule
   git -C "$submodule_dir" add .
   git -C "$submodule_dir" reset --hard > /dev/null
 
-  # # update submodule
-  git submodule update --init "$submodule_dir" > /dev/null
+  # update submodule
   git -C "$submodule_dir" checkout "$version_tag" 2> /dev/null
 }
 
