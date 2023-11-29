@@ -73,7 +73,13 @@ This repository is meant to maintain 2 minimal patch sets, one for [the custom a
 
 If, for example, you're looking to add support for another authentication scheme, you would likely want to start in the [/src](/src/) folder to add support there first, and then add any necessary hooks in to the [/template](/template/) to call your custom code.
 
+### Generating the SDK
+
 To regenerate the SDK with your changes, simply run [`./scripts/develop.sh`](/scripts/develop.sh)
+
+### Trying your updates locally
+
+Now that you've got the SDK generated, you can try using it locally by using NPM's `link` command in whatever project you want the consume the SDK with.
 
 ### Updating base versions
 
@@ -84,3 +90,5 @@ To update the base version of our dependencies, simply change the tag specified 
 | `cybersource-rest-client` | `cybersource_rest_client_version`   |
 | Swagger code-gen binary   | `swagger_codegen_version`           |
 | Swagger code-gen template | `swagger_codegen_templates_version` |
+
+Then, simply refer to [Generating the SDK](#generating-the-sdk) to rebuild.
