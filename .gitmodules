@@ -1,6 +1,6 @@
 [submodule "modules/cybersource-rest-client-node"]
 	path = modules/cybersource-rest-client-node
-	url = git@github.com:CyberSource/cybersource-rest-client-node.git
+	url = https://github.com/CyberSource/cybersource-rest-client-node.git
 [submodule "modules/templates"]
 	path = modules/templates
-	url = git@github.com:swagger-api/swagger-codegen-generators.git
+	url = https://github.com/swagger-api/swagger-codegen-generators.git
