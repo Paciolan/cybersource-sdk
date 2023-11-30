@@ -90,7 +90,7 @@ function generate() {
   fi
 
   # copy auth files into generated output
-  cp -r "$src_dir/" "$output_dir/"
+  cp -R "$src_dir"/* "$output_dir/"
 
   # update package.json
   tmp_packagejson="$tmp_dir/package.json"
