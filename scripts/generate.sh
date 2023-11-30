@@ -65,6 +65,7 @@ function update_openapi_spec() {
   else
     # convert spec to OpenAPI 3
     curl \
+      --silent \
       --location 'https://converter.swagger.io/api/convert' \
       --header 'accept: application/json' \
       --header 'Content-Type: application/json' \
