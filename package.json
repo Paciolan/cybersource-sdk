@@ -2,10 +2,19 @@
   "name": "@paciolan/cybersource-sdk",
   "description": "CyberSource REST API Typescript SDK",
   "version": "0.3.2",
+  "author": "Paciolan",
+  "homepage": "https://github.com/Paciolan/cybersource-sdk/blob/main/README.md",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Paciolan/cybersource-sdk"
+  },
   "keywords": [
     "cybersource"
   ],
-  "license": "Apache-2.0",
+  "files": [
+    "dist/"
+  ],
+  "license": "Cybersource",
   "dependencies": {
     "axios": "^1.4.0",
     "jwt-simple": "^0.5.6",
