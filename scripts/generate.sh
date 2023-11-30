@@ -91,6 +91,13 @@ function generate() {
 
   # copy auth files into generated output
   cp -R "$src_dir"/* "$output_dir/"
+  rm "$output_dir"/*.patch
+
+  # copy other files into generated output
+  cp \
+    "$root_dir/README.md" \
+    "$root_dir/LICENSE" \
+    "$output_dir/"
 
   # update package.json
   tmp_packagejson="$tmp_dir/package.json"

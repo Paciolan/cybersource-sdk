@@ -277,6 +277,20 @@ index 999d88df..3d451772 100644
 +/*.ts
 +/git_push.sh
 +.gitignore
+diff --git a/src/main/resources/handlebars/typescript-axios/package.mustache b/src/main/resources/handlebars/typescript-axios/package.mustache
+index 6c6114eb..92edf6bc 100644
+--- a/src/main/resources/handlebars/typescript-axios/package.mustache
++++ b/src/main/resources/handlebars/typescript-axios/package.mustache
+@@ -13,6 +13,9 @@
+   "license": "Unlicense",
+   "main": "./dist/index.js",
+   "typings": "./dist/index.d.ts",
++  "files": [
++    "dist/"
++  ],
+   "scripts": {
+     "build": "tsc --outDir dist/",
+     "prepublishOnly": "npm run build"
 diff --git a/src/main/resources/handlebars/typescript-axios/tsconfig.mustache b/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
 index c4a4cc77..9a2ea934 100644
 --- a/src/main/resources/handlebars/typescript-axios/tsconfig.mustache
