@@ -43,11 +43,13 @@ function update_cybersource_upstream() {
 }
 
 function update_openapi_spec() {
+  original_json_path="$cybersource_rest_client_dir/generator/cybersource-rest-spec.json"
+
   # copy official spec over if one does not already exist
   if [ ! -f "$cybersource_openapi_spec_path" ]; then
     mkdir -p "$(dirname "$cybersource_openapi_spec_path")"
     cp \
-      "$cybersource_rest_client_dir/generator/cybersource-rest-spec.json" \
+      "$original_json_path" \
       "$cybersource_openapi_spec_path"
   fi
 
@@ -58,13 +60,15 @@ function update_openapi_spec() {
   swagger_version=(${swagger_version//\./ })
 
   # convert spec to v3 if it's not already
-  if [ "${swagger_version[0]}" != "3" ]; then
+  if [ "${swagger_version[0]}" == "3" ]; then
+    cp "$original_json_path" "$cybersource_openapi_spec_path"
+  else
     # convert spec to OpenAPI 3
     curl \
-      --silent \
       --location 'https://converter.swagger.io/api/convert' \
+      --header 'accept: application/json' \
       --header 'Content-Type: application/json' \
-      --data @"$cybersource_rest_client_dir/generator/cybersource-rest-spec.json" \
+      --data-binary @"$original_json_path" \
       --output "$cybersource_openapi_spec_path"
   fi
 }
