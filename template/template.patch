@@ -1,5 +1,5 @@
 diff --git a/src/main/resources/handlebars/typescript-axios/apiInner.mustache b/src/main/resources/handlebars/typescript-axios/apiInner.mustache
-index 861245e1..225aa450 100644
+index 861245e1..2fe43f96 100644
 --- a/src/main/resources/handlebars/typescript-axios/apiInner.mustache
 +++ b/src/main/resources/handlebars/typescript-axios/apiInner.mustache
 @@ -3,6 +3,7 @@
@@ -62,15 +62,17 @@ index 861245e1..225aa450 100644
  
  {{/contents}}
  {{/operation}}
-@@ -335,7 +345,7 @@ export class {{classname}} extends BaseAPI {
+@@ -335,8 +345,8 @@ export class {{classname}} extends BaseAPI {
       * @throws {RequiredError}
       * @memberof {{classname}}
       */
 -    public async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig) : Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>> {
+-        return {{classname}}Fp(this.configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options).then((request) => request(this.axios, this.basePath));
 +    public async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig & Configuration) : Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>> {
-         return {{classname}}Fp(this.configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options).then((request) => request(this.axios, this.basePath));
++        return {{classname}}Fp(this.configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options).then((request) => request(this.axios, options.runEnvironment != null ? `https://${options.runEnvironment}` : this.basePath));
      }
      {{^@last}}
+ 
 diff --git a/src/main/resources/handlebars/typescript-axios/configuration.mustache b/src/main/resources/handlebars/typescript-axios/configuration.mustache
 index ae7e0dcc..e095223b 100644
 --- a/src/main/resources/handlebars/typescript-axios/configuration.mustache

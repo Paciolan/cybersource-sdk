@@ -346,7 +346,7 @@ export class {{classname}} extends BaseAPI {
      * @memberof {{classname}}
      */
     public async {{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}{{^required}}?{{/required}}: {{{dataType}}}, {{/parameters}}options?: AxiosRequestConfig & Configuration) : Promise<AxiosResponse<{{#returnType}}{{{returnType}}}{{/returnType}}{{^returnType}}void{{/returnType}}>> {
-        return {{classname}}Fp(this.configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options).then((request) => request(this.axios, this.basePath));
+        return {{classname}}Fp(this.configuration).{{nickname}}{{#isForm}}Form{{/isForm}}({{#parameters}}{{paramName}}, {{/parameters}}options).then((request) => request(this.axios, options.runEnvironment != null ? `https://${options.runEnvironment}` : this.basePath));
     }
     {{^@last}}
 
