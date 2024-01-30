@@ -5,7 +5,7 @@ src_dir="$root_dir/src"
 tmp_dir="/tmp/com.cybersource.node-sdk"
 git_modules_dir="$root_dir/modules"
 
-cybersource_rest_client_version="0.0.51"
+cybersource_rest_client_version="0.0.52"
 cybersource_rest_client_dir="$git_modules_dir/cybersource-rest-client-node"
 cybersource_rest_client_patch="$src_dir/custom-code.patch"
 
