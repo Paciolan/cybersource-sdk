@@ -13,6 +13,7 @@ function update_submodule() {
 
   # update submodule
   git submodule update --init "$submodule_dir" > /dev/null
+  git -C "$submodule_dir" fetch 2> /dev/null
   git -C "$submodule_dir" checkout "$version_tag" 2> /dev/null
 }
 

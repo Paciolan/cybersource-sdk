@@ -6,7 +6,6 @@ source "$(dirname "$0")/lib/check-latest-release.sh"
 source "$(dirname "$0")/lib/submodule.sh"
 
 function main() {
-  check_latest_release "CyberSource/cybersource-rest-client-node" "$cybersource_rest_client_version"
 
   update_submodule \
     "$cybersource_rest_client_version" \

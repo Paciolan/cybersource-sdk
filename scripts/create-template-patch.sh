@@ -6,7 +6,6 @@ source "$(dirname "$0")/lib/check-latest-release.sh"
 source "$(dirname "$0")/lib/submodule.sh"
 
 function main() {
-  check_latest_release "swagger-api/swagger-codegen-generators" "$swagger_codegen_templates_version"
 
   update_submodule \
     "$swagger_codegen_templates_version" \
