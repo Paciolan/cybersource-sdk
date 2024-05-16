@@ -17,7 +17,7 @@
 
     java = {
       enable = true;
-      jdk.package = pkgs.jdk;
+      jdk.package = pkgs.jdk17;
     };
   };
 
