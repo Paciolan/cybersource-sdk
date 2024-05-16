@@ -22,8 +22,11 @@ function apply_patch() {
   patch_path="$2"
 
   git -C "$submodule_dir" \
-    apply --ignore-space-change \
-      --ignore-whitespace "$patch_path"
+    apply \
+      --ignore-space-change \
+      --ignore-whitespace \
+      --allow-empty \
+      "$patch_path"
 
   # TODO: verify patch applied correctly
 }

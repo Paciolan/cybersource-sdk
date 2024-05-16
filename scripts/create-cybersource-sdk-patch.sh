@@ -13,7 +13,7 @@ function main() {
     ;
 
   cp -R "$src_dir/" "$cybersource_rest_client_dir/src/"
-  rm "$cybersource_rest_client_dir/src/"*.patch
+  rm -f "$cybersource_rest_client_dir/src/"*.patch
 
   # create patch
   git -C "$cybersource_rest_client_dir" add .
