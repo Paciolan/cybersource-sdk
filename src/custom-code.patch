@@ -655,6 +655,20 @@ index 00000000..aedef29b
 +  merchantConfig: MerchantConfig,
 +  loggerCategory: LiteralUnion<string, 'UnknownCategoryLogger'>,
 +): Logger;
+diff --git a/src/authentication/logging/Logger.js b/src/authentication/logging/Logger.js
+index 0b7679b9..55366224 100644
+--- a/src/authentication/logging/Logger.js
++++ b/src/authentication/logging/Logger.js
+@@ -23,9 +23,6 @@ exports.getLogger = function (merchantConfig, loggerCategory = 'UnknownCategoryL
+   }
+   var enableLog = merchantConfig.getLogConfiguration().isLogEnabled();
+   var enableMasking = merchantConfig.getLogConfiguration().isMaskingEnabled();
+-  var loggerCategoryRandomiser = Math.floor(Math.random() * (1000000000 - 100 + 1)) + 100;
+-
+-  loggerCategory = loggerCategory + loggerCategoryRandomiser;
+ 
+   var newLogger;
+ 
 diff --git a/src/authentication/util/PropertiesUtil.js b/src/authentication/util/PropertiesUtil.js
 index 86d6ae93..622c8cee 100644
 --- a/src/authentication/util/PropertiesUtil.js
