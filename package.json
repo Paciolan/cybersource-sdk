@@ -1,7 +1,7 @@
 {
   "name": "@paciolan/cybersource-sdk",
   "description": "CyberSource REST API Typescript SDK",
-  "version": "0.3.4",
+  "version": "0.3.5",
   "author": "Paciolan",
   "homepage": "https://github.com/Paciolan/cybersource-sdk/blob/main/README.md",
   "repository": {
