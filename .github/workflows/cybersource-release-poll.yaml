@@ -4,6 +4,9 @@ on:
   schedule:
     #        min hr day_month month day_week
     - cron: '0   16  *         *     *'
+  push:
+    paths:
+      - '.github/workflows/cybersource-release-poll.yaml'
 
 permissions:
   contents: 'read'
