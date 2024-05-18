@@ -31,16 +31,12 @@ jobs:
           source "$(pwd)/lib/variables.sh"
           source "$(pwd)/lib/check-latest-release.sh"
 
-          # update_text=$(
-          #   echo hi
-          # )
           update_text="$(
             check_latest_release \
               "CyberSource/cybersource-rest-client-node" \
               "$cybersource_rest_client_version" \
               2>&1
           )"
-
 
           # if the update message exists
           if [ -n "$update_text" ]; then
