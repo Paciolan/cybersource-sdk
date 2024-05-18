@@ -64,7 +64,7 @@ jobs:
     runs-on: 'ubuntu-latest'
     needs:
       - 'check_version'
-    if: ${{ needs.check_version.outputs.should_create_pr }}
+    if: ${{ needs.check_version.outputs.should_create_pr == 'true' }}
     env:
       latest_version: '${{ needs.check_version.outputs.latest_version }}'
       branch_name: '${{ needs.check_version.outputs.branch_name }}'
