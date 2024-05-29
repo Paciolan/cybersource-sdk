@@ -9,7 +9,7 @@ on:
       - '.github/workflows/cybersource-release-poll.yaml'
 
 permissions:
-  contents: 'read'
+  contents: 'write'
   actions: 'write'
 
 jobs:
