@@ -51,10 +51,14 @@ jobs:
               echo "latest_version=$latest_version" >> "$GITHUB_OUTPUT"
               echo "branch_name=$branch_name" >> "$GITHUB_OUTPUT"
 
+              echo "Upgrade to Cybersource SDK v$latest_version available." >> "$GITHUB_STEP_SUMMARY"
+
               exit 0
             fi
           fi
+
           echo "should_create_pr=false" >> "$GITHUB_OUTPUT"
+          echo "No upgrades available." >> "$GITHUB_STEP_SUMMARY"
 
   create_pr:
     runs-on: 'ubuntu-latest'
