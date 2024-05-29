@@ -93,7 +93,7 @@ jobs:
       - name: 'Set git user 👤'
         run: |-
           git config --global user.name 'Cybersource Upgrade Bot'
-          git config --global user.email 'lorleans+cybersource-upgrade-bot@paciolan.com'
+          git config --global user.email 'lorleans@paciolan.com'
       - name: 'Stage changes 📎'
         run: |-
           git add \
