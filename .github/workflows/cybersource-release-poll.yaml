@@ -90,6 +90,10 @@ jobs:
         timeout-minutes: 5
         run: |-
           nix develop --impure --command "scripts/develop.sh"
+      - name: 'Set git user 👤'
+        run: |-
+          git config --global user.name 'Cybersource Upgrade Bot'
+          git config --global user.email 'lorleans+cybersource-upgrade-bot@paciolan.com'
       - name: 'Stage changes 📎'
         run: |-
           git add \
