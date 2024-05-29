@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - '*'
+    paths-ignore:
+      - '.github/workflows/**'
+      - '!.github/workflows/build-publish.yaml'
 
 permissions:
   contents: 'read'
