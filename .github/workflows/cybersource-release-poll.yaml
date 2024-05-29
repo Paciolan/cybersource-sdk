@@ -52,7 +52,7 @@ jobs:
               echo "latest_version=$latest_version" >> "$GITHUB_OUTPUT"
               echo "branch_name=$branch_name" >> "$GITHUB_OUTPUT"
 
-              echo "Upgrade to Cybersource SDK v$latest_version available." >> "$GITHUB_STEP_SUMMARY"
+              echo "Upgrade to [Cybersource SDK v$latest_version](https://github.com/CyberSource/cybersource-rest-client-node/releases/tag/$latest_version) available." >> "$GITHUB_STEP_SUMMARY"
 
               exit 0
             fi
@@ -114,8 +114,14 @@ jobs:
         env:
           GITHUB_TOKEN: '${{ secrets.GITHUB_TOKEN }}'
         run: |-
+          body="$(cat << EOF
+          Upgrades to [Cybersource SDK v$latest_version](https://github.com/CyberSource/cybersource-rest-client-node/releases/tag/$latest_version).
+
+          Created via [Github Actions](https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}).
+          EOF
+          )"
           gh pr create \
             --base "${{ github.event.repository.default_branch }}" \
             --head "$branch_name" \
             --title "⬆️ Update Cybersource SDK to v$latest_version" \
-            --body "Created by Github action"
+            --body "$body"
